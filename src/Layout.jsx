@@ -7,7 +7,7 @@ function Layout() {
   return (
     <>
     <Sidebar/>
-    <Outlet/>
+
     </>
 
   )

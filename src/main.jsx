@@ -8,8 +8,13 @@ import {NextUIProvider} from '@nextui-org/react'
 import Home from './pages/Home.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import { ClerkProvider } from '@clerk/clerk-react'
-import SignInPage from './pages/SignInPage.jsx'
+
 import Sidebar from './components/ui/Sidebar'
+import Bookings from './pages/Bookings'
+import Availability from './pages/Availability'
+import Billing from './pages/Billing'
+import Settings from './pages/Settings'
+import Customers from './pages/Customers'
 
 const router = createBrowserRouter([
   {
@@ -21,13 +26,29 @@ const router = createBrowserRouter([
         element: <Home/>
       },
       {
-        path:'/sidebar',
-        element: <Sidebar/>
-      },
-      {
         path:'/dashboard',
         element: <Dashboard/>
-      }
+      },
+      {
+        path:'/bookings',
+        element: <Bookings/>
+      },
+      {
+        path:'/availability',
+        element: <Availability/>
+      },
+      {
+        path:'/billing',
+        element: <Billing/>
+      },
+      {
+        path:'/settings',
+        element: <Settings/>
+      },
+      {
+        path:'/customers',
+        element: <Customers/>
+      },
     ]
   }
 ])
