@@ -5,7 +5,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton , SignIn } from "@clerk/c
 
 function Navbar() {
   return (
-    <header className="flex items-center justify-between h-16 px-4 md:px-6" style={{ backgroundColor: '#1F1F23' }}>
+    <header className="flex items-center justify-between h-15 p-4  md:px-6" style={{background:'#0a0a0a'}} >
       <Link className="text-lg font-bold text-white" to="/">
         TimeSlot
       </Link>

@@ -9,6 +9,7 @@ import Home from './pages/Home.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import { ClerkProvider } from '@clerk/clerk-react'
 import SignInPage from './pages/SignInPage.jsx'
+import Sidebar from './components/ui/Sidebar'
 
 const router = createBrowserRouter([
   {
@@ -20,8 +21,12 @@ const router = createBrowserRouter([
         element: <Home/>
       },
       {
-        path:'/sign-in',
-        element: <SignInPage/>
+        path:'/sidebar',
+        element: <Sidebar/>
+      },
+      {
+        path:'/dashboard',
+        element: <Dashboard/>
       }
     ]
   }

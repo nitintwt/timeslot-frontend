@@ -15,7 +15,7 @@ function Home() {
   // to not make uncountable db calls while the user is on website , made a variable to set db call only once
   // using boolean value to check if the db call is already made or not
   // the variable is saved in the session storage , only once the db call is made
-  // if backend code is written such that , if email exists its sent respose user already exists 
+  // the backend code is written such that , if email exists it will send a respose that user already exists 
   // and if not then it register him
   useEffect(()=>{
     const databaseCallMade = sessionStorage.getItem('databaseCallMade');
@@ -40,7 +40,7 @@ function Home() {
 
   //console.log(user?.emailAddresses?.[0]?.emailAddress)
   return (
-    <div className='bg-gray-950 text-white h-screen'>
+    <div className='bg-black text-white h-screen'>
      <Toaster position="bottom-center" />
     </div>
   )

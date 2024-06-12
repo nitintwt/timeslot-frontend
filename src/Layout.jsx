@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react'
-import Navbar from './ui/Navbar'
+import Navbar from './components/ui/Navbar'
 import { Outlet } from 'react-router-dom'
+import Sidebar from './components/ui/Sidebar'
 
 function Layout() {
   return (
     <>
-    <Navbar/>
+    <Sidebar/>
     <Outlet/>
     </>
 
