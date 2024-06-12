@@ -15,6 +15,7 @@ import Availability from './pages/Availability'
 import Billing from './pages/Billing'
 import Settings from './pages/Settings'
 import Customers from './pages/Customers'
+import Profile from './pages/Profile'
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path:'/customers',
         element: <Customers/>
+      },
+      {
+        path:'/profile',
+        element: <Profile/>
       },
     ]
   }
