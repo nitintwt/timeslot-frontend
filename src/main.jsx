@@ -15,7 +15,8 @@ import Availability from './pages/Availability'
 import Billing from './pages/Billing'
 import Settings from './pages/Settings'
 import Customers from './pages/Customers'
-import Profile from './pages/Profile'
+import Slots from './pages/Slots'
+
 
 const router = createBrowserRouter([
   {
@@ -51,11 +52,11 @@ const router = createBrowserRouter([
         element: <Customers/>
       },
       {
-        path:'/profile',
-        element: <Profile/>
-      },
-    ]
-  }
+        path: '/slots',
+        element: <Slots/>
+      }
+    ]}
+  
 ])
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY

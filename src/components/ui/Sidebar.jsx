@@ -13,6 +13,7 @@ import { FaUsers } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
 import { IoMenu } from "react-icons/io5";
+import { IoIosCreate } from "react-icons/io";
 
 export default function Sidebar() {
   // bg-muted , text-primary 
@@ -31,9 +32,9 @@ export default function Sidebar() {
               <GoGraph size={21}/>
                Dashboard
               </NavLink>
-              <NavLink to="/profile" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}} >
-              <CgProfile size={21}/>
-               Profile
+              <NavLink to="/slots" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}} >
+              <IoIosCreate  size={21} />
+               Slots
               </NavLink>
               <NavLink to="/bookings" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                 <LucideCalendarCheck size={21}/>
@@ -89,9 +90,9 @@ export default function Sidebar() {
                  <GoGraph size={21}/>
                   Dashboard
                 </NavLink>
-                <NavLink to="/profile" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
-                <CgProfile size={21}/>
-                  Profile
+                <NavLink to="/slots" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+                <IoIosCreate  size={21} />
+                Slots
                 </NavLink>
                 <NavLink to="/bookings" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl  px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                  <LucideCalendarCheck size={21}/>
