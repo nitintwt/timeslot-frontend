@@ -28,48 +28,35 @@ export default function Sidebar() {
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-m font-medium lg:px-4">
-              <NavLink to="/dashboard" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}} >
+              <NavLink to="/dashboard" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}} >
               <GoGraph size={21}/>
                Dashboard
               </NavLink>
-              <NavLink to="/slots" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}} >
+              <NavLink to="/slots" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}} >
               <IoIosCreate  size={21} />
                Slots
               </NavLink>
-              <NavLink to="/bookings" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+              <NavLink to="/bookings" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                 <LucideCalendarCheck size={21}/>
                 Bookings
               </NavLink>
-              <NavLink to="/availability" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+              <NavLink to="/availability" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                 <IoTime size={21}/>
                 Availability
               </NavLink>
-              <NavLink to="/billing" className="flex text-lg items-center gap-2 rounded-lg  px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}> 
+              <NavLink to="/billing" className="flex text-lg items-center gap-2 rounded-lg  px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}> 
                 <MdOutlineAttachMoney size={25} />
                 Billing
               </NavLink>
-              <NavLink to="/settings" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+              <NavLink to="/settings" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                <IoSettings size={20} />
                 Settings
               </NavLink>
-              <NavLink to="/customers" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-muted-foreground transition-all hover:text-primary" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+              <NavLink to="/customers" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                  <FaUsers size={21} />
                 Customers
               </NavLink>
             </nav>
-          </div>
-          <div className="mt-auto p-2">
-            <Card className='text-white bg-black'>
-              <CardHeader className="p-2 pt-0 md:p-4">
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>Unlock all features and get unlimited access to our support team.</CardDescription>
-              </CardHeader>
-              <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                <Button size="sm" className="w-full">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>
@@ -86,48 +73,35 @@ export default function Sidebar() {
                 <NavLink to="/" className="flex items-center  gap-2 text-2xl pb-5 ">
                   <span className=" text-white font-bold">TimeSlot</span>
                 </NavLink>
-                <NavLink to="/dashboard" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+                <NavLink to="/dashboard" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                  <GoGraph size={21}/>
                   Dashboard
                 </NavLink>
-                <NavLink to="/slots" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+                <NavLink to="/slots" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                 <IoIosCreate  size={21} />
                 Slots
                 </NavLink>
-                <NavLink to="/bookings" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl  px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+                <NavLink to="/bookings" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl  px-3 py-2 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                  <LucideCalendarCheck size={21}/>
                   Bookings
                 </NavLink>
-                <NavLink to="/availability" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+                <NavLink to="/availability" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                  <IoTime size={21}/>
                   Availability
                 </NavLink>
-                <NavLink to="/billing" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+                <NavLink to="/billing" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                  <MdOutlineAttachMoney size={23} />
                   Billing
                 </NavLink>
-                <NavLink to="/settings" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+                <NavLink to="/settings" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                  <IoSettings size={20} />
                   Settings
                 </NavLink>
-                <NavLink to="/customers" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
+                <NavLink to="/customers" className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
                  <FaUsers size={21} />
                   Customers
                 </NavLink>
               </nav>
-              <div className="mt-auto ">
-                <Card className='bg-black'>
-                  <CardHeader className='text-white'>
-                    <CardTitle>Upgrade to Pro</CardTitle>
-                    <CardDescription>Unlock all features and get unlimited access to our support team.</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button size="sm" className="w-full">
-                      Upgrade
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
             </SheetContent>
           </Sheet>
           <div className="ml-auto ">
