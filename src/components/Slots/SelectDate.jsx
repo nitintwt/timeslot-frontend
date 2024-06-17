@@ -1,19 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar } from '@nextui-org/calendar';
+import { useDispatch, useSelector } from 'react-redux';
+import { createSlot } from '@/store/slotsSlice';
+import { useSelect } from '@nextui-org/react';
 
 function SelectDate() {
   const [date , setDate]= useState()
-  console.log(date)
+  const dispatch = useDispatch()
+  const slots = useSelector((state)=> state?.slots)
+
+  console.log(slots)
+  
+  useEffect(()=>{
+    if(date){
+      const formateDate = ()=>{
+        const day = date?.day
+        const month = date?.month
+        const year = date?.year
+    
+        return `${day}/${month}/${year}`
+      }
+      console.log(formateDate(date))
+      dispatch(createSlot({
+        date: formateDate(date)
+      }))
+    }
+  },[date])
+
+
   return (
-    <div className="flex justify-center m-12 ">
-      <div className="transform scale-125 p-4">
-        <Calendar
-        value={date} 
-        onChange={setDate}
-        aria-label="Date (Uncontrolled)"
-        />
-      </div>
-    </div>
+  <div>
+    
+  </div>
   )
 }
 

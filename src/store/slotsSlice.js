@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState ={
   slots:[
     {
-    date: null,
-    startTime:null,
-    endTime: null,
+    date: '',
+    startTime: '',
+    endTime: '',
     paid: false
     }
   ]

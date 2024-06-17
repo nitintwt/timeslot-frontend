@@ -1,17 +1,13 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { Button } from "./button";
+import { Button } from "@nextui-org/react";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
-import { Badge } from "./badge";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './card';
 import { Sheet, SheetTrigger, SheetContent } from "./sheet";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "./dropdown-menu";
 import { LucideCalendarCheck } from "lucide-react";
 import { IoTime } from "react-icons/io5";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
-import { CgProfile } from "react-icons/cg";
 import { IoMenu } from "react-icons/io5";
 import { IoIosCreate } from "react-icons/io";
 
