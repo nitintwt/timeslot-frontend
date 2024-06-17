@@ -6,7 +6,8 @@ const initialState ={
     date: '',
     startTime: '',
     endTime: '',
-    paid: false
+    paid: false,
+    price:0
     }
   ]
 }
