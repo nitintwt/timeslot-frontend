@@ -10,10 +10,14 @@ const slotsSlice = createSlice({
   reducers:{
     createSlot: (state , action)=>{
       state.slots.push(action.payload);
+    },
+    deleteSlot :(state , action)=>{
+      const startTime = action.payload
+      state.slots = state.slots.filter((slot)=> slot.startTime !== startTime)
     }
   }
 })
 
-export const {createSlot} = slotsSlice.actions
+export const {createSlot , deleteSlot} = slotsSlice.actions
 
 export default slotsSlice.reducer

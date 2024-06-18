@@ -1,11 +1,14 @@
-import React, { useState, useSyncExternalStore } from 'react'
-import {Input} from "@nextui-org/react";
+import React, { useEffect, useState, useSyncExternalStore } from 'react'
+import {Input, user} from "@nextui-org/react";
 import {Button, ButtonGroup} from "@nextui-org/button";
 import TimeSlotPreviewCard from './TimeSlotPreviewCard.jsx'
 import { useDispatch , useSelector} from 'react-redux';
 import { createSlot } from '@/store/slotsSlice.js';
 import { Calendar } from '@nextui-org/calendar';
 import { Select, SelectItem } from '@nextui-org/react';
+import axios from 'axios';
+import { useUser } from '@clerk/clerk-react';
+import { Toaster, toast } from 'sonner';
 
 
 function InputSlotsTime() {
@@ -16,6 +19,7 @@ function InputSlotsTime() {
   const [price , setPrice]= useState(0)
   const dispatch = useDispatch()
   const slots = useSelector((state)=> state?.slots?.slots)
+  const {user}= useUser()
 
   const formateDate = ()=>{
     const day = date?.day
@@ -24,6 +28,16 @@ function InputSlotsTime() {
 
     return `${day}/${month}/${year}`
   }
+
+  useEffect(()=>{
+    const fetchUserDetails = async ()=>{
+      const userDetails = await axios.get("/api/v1/users/getUserDetails" , {params: {email: user?.emailAddresses?.[0]?.emailAddress}})
+      if (paid =="true" &&  userDetails?.data?.data?.stripeAccountId== null) {
+        toast.warning("Please link your Stripe account first. Go to Billing Page.")
+      }
+    }
+    fetchUserDetails()
+  },[paid])
 
   const handleSubmit = ()=>{
     dispatch(createSlot({
@@ -53,8 +67,8 @@ function InputSlotsTime() {
         <div>
           <h2 className="text-xl text-white font-bold mb-8">Time Slot Settings</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-white">
-           <Input type="email" variant='bordered' label="Start Time" value={startTime} onChange={(e)=>setStartTime(e.target.value)} />
-           <Input type="email" variant='bordered' label="End Time" value={endTime} onChange={(e)=> setEndTime(e.target.value)} />
+           <Input type="time" variant='bordered' label="Start Time" value={startTime} onChange={(e)=>setStartTime(e.target.value)} />
+           <Input type="time" variant='bordered' label="End Time" value={endTime} onChange={(e)=> setEndTime(e.target.value)} />
           </div>
           <div className='pt-8 w-[20%]'>
             <Select
@@ -74,7 +88,7 @@ function InputSlotsTime() {
             </Select>
           </div>
           {paid =="true" ? (
-            <Input className='pt-8 w-[50%] text-white' type="email" variant='bordered' label="Price of Slot" value={price} onChange={(e)=> setPrice(e.target.value)} />
+            <Input className='pt-8 w-[50%] text-white' type="number" variant='bordered' label="Price of Slot" value={price} onChange={(e)=> setPrice(e.target.value)} />
           ):('')}
           <div className='text-white p-8 flex justify-end'>
             <Button color="primary" onClick={handleSubmit}>
@@ -102,8 +116,9 @@ function InputSlotsTime() {
           : (<h1 className='text-white text-xl font-bold'>Empty Slots</h1>)
           }
         </div>
-        
+        <Toaster position="bottom-center" />
       </div>
+      
     </div>
   )
 }
