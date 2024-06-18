@@ -15,7 +15,7 @@ function InputSlotsTime() {
   const [paid , setPaid]= useState(false)
   const [price , setPrice]= useState(0)
   const dispatch = useDispatch()
-  const slots = useSelector((state)=> state?.slots)
+  const slots = useSelector((state)=> state?.slots?.slots)
 
   const formateDate = ()=>{
     const day = date?.day
@@ -33,7 +33,10 @@ function InputSlotsTime() {
       paid: paid,
       price:price
     }))
-     console.log(slots)
+     setStartTime('')
+     setEndTime('')
+     setPaid(false)
+     setPrice('')
   }
   return (
     <div className=" bg-black dark p-4 md:p-8 space-y-6 overflow-auto">
@@ -62,16 +65,16 @@ function InputSlotsTime() {
             value={paid}
             onChange={(e) => setPaid(e.target.value)}
             >
-              <SelectItem key="true" value="True">
+              <SelectItem key="true" value="true">
                 True
               </SelectItem>
-              <SelectItem key="false" value="False">
+              <SelectItem key="false" value="false">
                 False
               </SelectItem>
             </Select>
           </div>
-          {paid ? (
-            <Input className='pt-8' type="email" variant='bordered' label="Price of Slot" value={price} onChange={(e)=> setPrice(e.target.value)} />
+          {paid =="true" ? (
+            <Input className='pt-8 w-[50%] text-white' type="email" variant='bordered' label="Price of Slot" value={price} onChange={(e)=> setPrice(e.target.value)} />
           ):('')}
           <div className='text-white p-8 flex justify-end'>
             <Button color="primary" onClick={handleSubmit}>
@@ -80,14 +83,24 @@ function InputSlotsTime() {
           </div>
           <h2 className='text-xl dark font-bold text-white pb-8'>Time Slot Preview</h2>
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
-            <TimeSlotPreviewCard/>
-            <TimeSlotPreviewCard/>
-            <TimeSlotPreviewCard/>
-            <TimeSlotPreviewCard/>
+             {
+              slots.map((slot)=>(
+                <TimeSlotPreviewCard
+                key={Math.random()}
+                startTime={slot?.startTime}
+                endTime={slot?.endTime}
+                price={slot?.price}
+                paid={slot?.paid}
+                />
+              ))
+             }
           </div>
-           <div className='flex justify-end'>
-           <Button className='m-5 text-md font-bold' color="primary" variant="shadow">Save</Button>
-           </div>
+          {slots.length >0 ? 
+          (<div className='flex justify-end'>
+             <Button className='m-5 text-md font-bold' color="primary" variant="shadow">Save</Button>
+            </div>)
+          : (<h1 className='text-white text-xl font-bold'>Empty Slots</h1>)
+          }
         </div>
         
       </div>

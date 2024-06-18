@@ -1,15 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState ={
-  slots:[
-    {
-    date: '',
-    startTime: '',
-    endTime: '',
-    paid: false,
-    price:0
-    }
-  ]
+  slots:[]
 }
 
 const slotsSlice = createSlice({
