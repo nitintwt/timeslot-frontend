@@ -1,7 +1,9 @@
+import { saveId } from '@/store/userSlice';
 import { useUser } from '@clerk/clerk-react'
 import { EmailLinkErrorCode } from '@clerk/clerk-react/errors'
 import axios from 'axios'
 import React, { Fragment, useCallback, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 import { Toaster, toast } from 'sonner';
 
 
@@ -9,6 +11,7 @@ import { Toaster, toast } from 'sonner';
 
 function Home() {
   const {user}= useUser()
+  const dispatch = useDispatch()
 
 
   // I am saving the user email , and name in db just after clerk auth completion
@@ -26,6 +29,7 @@ function Home() {
           email: user?.emailAddresses?.[0]?.emailAddress,
           fullName : user?.fullName
           })
+          dispatch(saveId(saveUserInDb?.data?.data?._id ))
           toast.success(saveUserInDb?.data?.message)
           sessionStorage.setItem('databaseCallMade', 'true');
           //console.log(saveUserInDb)
