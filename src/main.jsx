@@ -9,8 +9,6 @@ import Home from './pages/Home.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { Provider} from 'react-redux'
-
-import Sidebar from './components/ui/Sidebar'
 import Bookings from './pages/Bookings'
 import Availability from './pages/Availability'
 import Billing from './pages/Billing'
@@ -18,6 +16,7 @@ import Settings from './pages/Settings'
 import Customers from './pages/Customers'
 import Slots from './pages/Slots'
 import store from './store/store'
+import BookSlot from './pages/BookSlot'
 
 
 const router = createBrowserRouter([
@@ -56,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: '/slots',
         element: <Slots/>
+      },
+      {
+        path: 'book-slot',
+        element: <BookSlot/>
       }
     ]}
   

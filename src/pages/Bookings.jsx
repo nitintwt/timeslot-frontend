@@ -1,9 +1,10 @@
+
 import React from 'react'
 
 function Bookings() {
   return (
-    <div>
-      Bookings
+    <div className='bg-black h-screen'>
+      booking
     </div>
   )
 }

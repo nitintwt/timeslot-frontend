@@ -9,12 +9,13 @@ import { Select, SelectItem } from '@nextui-org/react';
 import axios from 'axios';
 import { useUser } from '@clerk/clerk-react';
 import { Toaster, toast } from 'sonner';
+import {today, getLocalTimeZone} from "@internationalized/date";
 
 
 function InputSlotsTime() {
   const [startTime , setStartTime]= useState('')
   const [endTime , setEndTime]= useState('')
-  const [date , setDate]= useState('')
+  const [date , setDate]= useState()
   const [paid , setPaid]= useState(false)
   const [price , setPrice]= useState(0)
   const dispatch = useDispatch()
@@ -92,6 +93,8 @@ function InputSlotsTime() {
             aria-label="Date (Uncontrolled)"
             value={date}
             onChange={setDate}
+            defaultValue={today(getLocalTimeZone())}
+            minValue={today(getLocalTimeZone())}
             />
           </div>
         </div>
