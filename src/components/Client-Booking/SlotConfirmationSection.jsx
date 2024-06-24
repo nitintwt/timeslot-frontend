@@ -3,28 +3,39 @@ import { Calendar } from '@nextui-org/calendar';
 import {Button, ButtonGroup} from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import {today, getLocalTimeZone} from "@internationalized/date";
+import axios from "axios";
+import { useUser } from '@clerk/clerk-react'
+import SlotCard from "./SlotCard";
 
 export default function SelectTimeSlot() {
   const [selectedDate, setSelectedDate] = useState()
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const availableTimeSlots = [
-    { time: "9:00 AM", available: true },
-    { time: "10:00 AM", available: true },
-    { time: "11:00 AM", available: true },
-    { time: "12:00 PM", available: true },
-    { time: "1:00 PM", available: true },
-    { time: "2:00 PM", available: true },
-    { time: "3:00 PM", available: true },
-    { time: "4:00 PM", available: true },
-    { time: "5:00 PM", available: true },
-  ]
+  const [slots , setSlots]= useState([])
+  const {user}= useUser()
 
-  const handleDateChange = (date) => {
+  const formatDate = (date) => {
+    if (!date) return "";
+    const day = date.day;
+    const month = date.month;
+    const year = date.year;
+    return `${day}/${month}/${year}`;
+  };
+
+  const handleDateChange = async (date) => {
     setSelectedDate(date)
     setSelectedTimeSlot(null)
-
+    const formattedDate = formatDate(date);
+    try {
+      const fetchSlots = await axios.get("/api/v1/slot/getSlots" , {
+        params:{date:formattedDate , email:user?.emailAddresses?.[0]?.emailAddress,}
+      })
+      console.log(fetchSlots.data.data)
+      setSlots(fetchSlots.data.data)
+    } catch (error) {
+      console.log("Error fetching slots" , error)
+    }
   }
 
   const handleTimeSlotSelect = (timeSlot) => {
@@ -56,28 +67,21 @@ export default function SelectTimeSlot() {
           </div>
         </div>
         <div>
-          <div className="grid grid-cols-3 gap-4">
-            {availableTimeSlots.map((timeSlot, index) => (
-              <Button
-                key={index}
-                variant={selectedTimeSlot === timeSlot ? "primary" : "outline"}
-                onClick={() => handleTimeSlotSelect(timeSlot)}
-                disabled={!timeSlot.available}
-                className="justify-start"
-              >
-                {timeSlot.time}
-              </Button>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+            {slots?.map((slot)=>(
+              <button onClick={()=> handleTimeSlotSelect(slot)}>
+                <SlotCard startTime={slot.startTime} endTime={slot.endTime} price={slot?.price} paid={slot?.paid}/>
+              </button>
             ))}
+
           </div>
           {selectedTimeSlot && (
             <form onSubmit={handleSubmit} className="mt-8 space-y-4 text-white ">
               <div>
-                <div htmlFor="name">Name</div>
-                <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                <Input id="name" type="string" variant="bordered" label='Your Name' value={name} onChange={(e) => setName(e.target.value)} required />
               </div>
               <div>
-                <div htmlFor="email">Email</div>
-                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <Input id="email" type="email" variant="bordered" label='Your Email' value={email} onChange={(e) => setEmail(e.target.value)} required />
               </div>
               <Button type="submit" className="w-full" color="primary" variant="shadow">
                 Book Slot
