@@ -4,10 +4,10 @@ import { MdDelete } from "react-icons/md";
 import { useDispatch } from 'react-redux';
 import { deleteSlot } from '@/store/slotsSlice';
 
-const SlotCard = ({startTime , endTime , paid , price}) =>{
+const SlotCard = ({startTime , endTime , paid , price , selected}) =>{
 
   return (
-    <Card>
+    <Card style={{ backgroundColor: selected ? '#000814' : '' }} >
       <CardBody >
        <div>
           <div className="p-4 rounded-md">

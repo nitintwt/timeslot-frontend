@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import { Calendar } from '@nextui-org/calendar';
 import {Button, ButtonGroup} from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -6,6 +6,7 @@ import {today, getLocalTimeZone} from "@internationalized/date";
 import axios from "axios";
 import { useUser } from '@clerk/clerk-react'
 import SlotCard from "./SlotCard";
+import { Link } from "react-router-dom";
 
 export default function SelectTimeSlot() {
   const [selectedDate, setSelectedDate] = useState()
@@ -13,6 +14,8 @@ export default function SelectTimeSlot() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [slots , setSlots]= useState([])
+  const [booking , setBooking]= useState(false)
+  const [booked , setBooked]= useState(false)
   const {user}= useUser()
 
   const formatDate = (date) => {
@@ -31,7 +34,6 @@ export default function SelectTimeSlot() {
       const fetchSlots = await axios.get("/api/v1/slot/getSlots" , {
         params:{date:formattedDate , email:user?.emailAddresses?.[0]?.emailAddress,}
       })
-      console.log(fetchSlots.data.data)
       setSlots(fetchSlots.data.data)
     } catch (error) {
       console.log("Error fetching slots" , error)
@@ -42,54 +44,109 @@ export default function SelectTimeSlot() {
     setSelectedTimeSlot(timeSlot)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    setBooking(true)
     e.preventDefault()
-    console.log("Booking submitted:", {
-      date: selectedDate.toLocaleDateString(),
-      timeSlot: selectedTimeSlot.time,
-      name,
-      email,
-    })
+    try {
+      const bookSlot = await axios.post("/api/v1/customer/bookSlot" , {
+        email: email,
+        name: name,
+        slotId : selectedTimeSlot._id
+      })
+      console.log("Slot booking done" , bookSlot)
+      const sendMail = await axios.post("/api/v1/customer/sendmail", {
+        clientEmail: email,
+        clientName:name,
+        slotId: selectedTimeSlot._id,
+      })
+      setBooked(true)
+      console.log("mail sent successfully" , sendMail)
+    } catch (error) {
+      console.log("Something went wrong while booking slot" , error)
+    }
   }
-  return (
-    <div className=" mx-auto p-6 sm:p-10 bg-black dark  ">
-      <h1 className="text-3xl font-bold mb-6 text-neutral-300">Book a Time Slot</h1>
-      <div className="grid md:grid-cols-2 gap-8 ">
-        <div className="flex justify-center m-12">
-        <div className="transform scale-125 p-4">
-            <Calendar
-            aria-label="Date (Uncontrolled)"
-            value={selectedDate}
-            onChange={handleDateChange}
-            defaultValue={today(getLocalTimeZone())}
-            minValue={today(getLocalTimeZone())}
-            />
-          </div>
-        </div>
-        <div>
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
-            {slots?.map((slot)=>(
-              <button onClick={()=> handleTimeSlotSelect(slot)}>
-                <SlotCard startTime={slot.startTime} endTime={slot.endTime} price={slot?.price} paid={slot?.paid}/>
-              </button>
-            ))}
 
+  return (
+    <Fragment>
+    { booked ? (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div className="max-w-md p-8 bg-background rounded-lg shadow-lg">
+          <div className="flex flex-col items-center justify-center gap-6">
+            <CircleCheckIcon className="w-16 h-16 text-green-500" />
+            <h2 className="text-2xl font-bold">Booking Confirmed</h2>
+            <p className="text-muted-foreground">
+              Thank you for your booking. Please check your email for further information and updates.
+            </p>
           </div>
-          {selectedTimeSlot && (
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4 text-white ">
-              <div>
-                <Input id="name" type="string" variant="bordered" label='Your Name' value={name} onChange={(e) => setName(e.target.value)} required />
-              </div>
-              <div>
-                <Input id="email" type="email" variant="bordered" label='Your Email' value={email} onChange={(e) => setEmail(e.target.value)} required />
-              </div>
-              <Button type="submit" className="w-full" color="primary" variant="shadow">
-                Book Slot
-              </Button>
-            </form>
-          )}
         </div>
       </div>
-    </div>
+    ) : 
+      (
+      <div className=" mx-auto p-6 sm:p-10 bg-black dark  ">
+        <h1 className="text-3xl font-bold mb-6 text-neutral-300">Book a Time Slot</h1>
+        <div className="grid md:grid-cols-2 gap-8 ">
+          <div className="flex justify-center m-12">
+            <div className="transform scale-125 p-4">
+              <Calendar
+              aria-label="Date (Uncontrolled)"
+              value={selectedDate}
+              onChange={handleDateChange}
+              defaultValue={today(getLocalTimeZone())}
+              minValue={today(getLocalTimeZone())}
+              />
+            </div>
+          </div>
+          <div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+              {slots?.map((slot)=>(
+                <button key={slot._id} onClick={()=> handleTimeSlotSelect(slot)}>
+                  <SlotCard startTime={slot.startTime} endTime={slot.endTime} price={slot?.price} paid={slot?.paid} selected={selectedTimeSlot?._id === slot._id} />
+                </button>
+              ))}
+            </div>
+            {selectedTimeSlot && (
+              <form onSubmit={handleSubmit} className="mt-8 space-y-4 text-white ">
+                <div>
+                  <Input id="name" type="string" variant="bordered" label='Your Name' value={name} onChange={(e) => setName(e.target.value)} required />
+                </div>
+                <div>
+                  <Input id="email" type="email" variant="bordered" label='Your Email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+                {booking ? (
+                  <Button type="submit" className="w-full" color="primary" variant="shadow" isLoading >
+                    Booking
+                  </Button>
+                ) : (
+                <Button type="submit" className="w-full" color="primary" variant="shadow"  >
+                  Book Slot
+                </Button>
+                )}
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+      )}
+      </Fragment>
+  )
+}
+
+function CircleCheckIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
   )
 }
