@@ -6,7 +6,7 @@ import {today, getLocalTimeZone} from "@internationalized/date";
 import axios from "axios";
 import { useUser } from '@clerk/clerk-react'
 import SlotCard from "./SlotCard";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function SelectTimeSlot() {
   const [selectedDate, setSelectedDate] = useState(today(getLocalTimeZone()))
@@ -17,6 +17,7 @@ export default function SelectTimeSlot() {
   const [booking , setBooking]= useState(false)
   const [booked , setBooked]= useState(false)
   const {user}= useUser()
+  const {username}= useParams()
 
   const formatDate = (date) => {
     if (!date) return "";
@@ -35,9 +36,10 @@ export default function SelectTimeSlot() {
     const fetchSlots = async ()=>{
       try {
         const fetch = await axios.get("/api/v1/slot/getSlots" , {
-          params:{date:formattedDate , email:"nitinsingh2368@gmail.com",}
+          params:{date:formattedDate , userName:username,}
         })
         setSlots(fetch.data.data)
+        console.log(fetch)
       } catch (error) {
         console.log("Error fetching slots" , error)
       }

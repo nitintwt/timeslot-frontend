@@ -11,6 +11,8 @@ import { useUser } from '@clerk/clerk-react';
 import { Toaster, toast } from 'sonner';
 import {today, getLocalTimeZone} from "@internationalized/date";
 import UsernameInput from './UsernameInput.jsx';
+import {Link} from "@nextui-org/react";
+
 
 
 function CreateSlots() {
@@ -20,19 +22,20 @@ function CreateSlots() {
   const [paid , setPaid]= useState(false)
   const [price , setPrice]= useState(0)
   const [userNameExist , setUserNameExist]= useState(false)
+  const [userName , setUserName]= useState('')
   const dispatch = useDispatch()
   const slots = useSelector((state)=> state?.slots?.slots)
-  const {user}= useUser()
   const userDbId = sessionStorage.getItem('userDbId')
 
   // the date format from the calender component is unreadble by human , so updated the date to make it readable
-  const formateDate = (date)=>{
-    const day = date?.day
-    const month = date?.month
-    const year = date?.year
+  const formateDate = (selectedDate)=>{
+    const day = selectedDate?.day
+    const month = selectedDate?.month
+    const year = selectedDate?.year
 
     return `${day}/${month}/${year}`
   }
+  console.log(userNameExist)
   
   // delete whole slots in the redux store , when user selects a different date
   useEffect(()=>{
@@ -45,15 +48,16 @@ function CreateSlots() {
     const fetchUserDetails = async ()=>{
       const userDetails = await axios.get("/api/v1/users/getUserDetails" , {params: {userDbId: userDbId}})
       console.log(userDetails?.data?.data?.userName)
-      if (!userDetails?.data?.data?.userName== null) {
+      if (userDetails?.data?.data?.userName) {
         setUserNameExist(true)
+        setUserName(userDetails?.data?.data?.userName)
       }
       if (paid=='true' &&  userDetails?.data?.data?.stripeAccountId== null) {
         toast.warning("Please link your Stripe account first. Go to Billing Page.")
       }
     }
     fetchUserDetails()
-  },[paid])
+  },[paid , userNameExist])
 
   // when user create a slot , first it get saves in the redux store
   const handleSubmit = ()=>{
@@ -93,11 +97,18 @@ function CreateSlots() {
   }
 
   return (
-    <div className=" bg-black dark p-4 md:p-8 space-y-6 overflow-auto">
-       {userNameExist  && <UsernameInput />}
+    <div className=" bg-black dark p-4 md:p- space-y-6 overflow-auto">
+      {userNameExist ? (
+        <div className='flex m-5'>
+          <label className='text-white'>Link of your booking page : </label>
+          <p className='ml-2'>
+            <Link href={`/${userName}`}> {`localhost:3000/${userName}`}</Link>
+          </p>
+        </div>
+        ) : (<UsernameInput />)}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2">
-        <div className=" flex justify-center m-12 ">
-          <div className="transform scale-125 p-4">
+        <div className=" flex flex-col justify-center items-center m-12 ">
+          <div className="transform scale-125 p-4 mb-5">
             <Calendar
             aria-label="Date (Uncontrolled)"
             value={date}

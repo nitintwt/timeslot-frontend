@@ -22,7 +22,7 @@ export default function UsernameInput() {
 
   return (
     <>
-      <Button onPress={onOpen} color="primary">Open Modal</Button>
+      <Button onPress={onOpen} color="primary" variant="light">Create username</Button>
       <Modal 
         isOpen={isOpen} 
         onOpenChange={onOpenChange}
