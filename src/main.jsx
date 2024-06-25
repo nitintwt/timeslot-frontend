@@ -57,7 +57,7 @@ const router = createBrowserRouter([
         element: <Slots/>
       },
       {
-        path: 'book-slot',
+        path: '/:username',
         element: <BookSlot/>
       }
     ]}

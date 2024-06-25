@@ -1,7 +1,4 @@
-
-import InputSlotsTime from "@/components/Slots/InputSlotDateAndTime"
-
-
+import CreateSlots from "../components/Slots/CreateSlots.jsx"
 
 export default function Component() {
   return (
@@ -10,7 +7,7 @@ export default function Component() {
         <h1 className="text-2xl font-bold">Create Your Slots</h1>
       </header>
         <div>
-          <InputSlotsTime/>
+          <CreateSlots/>
         </div>
       </div>
   )

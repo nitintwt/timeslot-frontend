@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { Calendar } from '@nextui-org/calendar';
 import {Button, ButtonGroup} from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -9,7 +9,7 @@ import SlotCard from "./SlotCard";
 import { Link } from "react-router-dom";
 
 export default function SelectTimeSlot() {
-  const [selectedDate, setSelectedDate] = useState()
+  const [selectedDate, setSelectedDate] = useState(today(getLocalTimeZone()))
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -24,26 +24,32 @@ export default function SelectTimeSlot() {
     const month = date.month;
     const year = date.year;
     return `${day}/${month}/${year}`;
-  };
-
-  const handleDateChange = async (date) => {
-    setSelectedDate(date)
-    setSelectedTimeSlot(null)
-    const formattedDate = formatDate(date);
-    try {
-      const fetchSlots = await axios.get("/api/v1/slot/getSlots" , {
-        params:{date:formattedDate , email:user?.emailAddresses?.[0]?.emailAddress,}
-      })
-      setSlots(fetchSlots.data.data)
-    } catch (error) {
-      console.log("Error fetching slots" , error)
-    }
   }
+
+  // fetch all slots which are available according to the selected date
+  // we fetch the slots according the username , which we get from the route param. It's a unique id type thing.
+  // the username belong to the user whose slots the client want to book.
+  useEffect (()=>{
+    setSelectedTimeSlot(null)
+    const formattedDate = formatDate(selectedDate);
+    const fetchSlots = async ()=>{
+      try {
+        const fetch = await axios.get("/api/v1/slot/getSlots" , {
+          params:{date:formattedDate , email:"nitinsingh2368@gmail.com",}
+        })
+        setSlots(fetch.data.data)
+      } catch (error) {
+        console.log("Error fetching slots" , error)
+      }
+    }
+    fetchSlots()
+  },[selectedDate])
 
   const handleTimeSlotSelect = (timeSlot) => {
     setSelectedTimeSlot(timeSlot)
   }
 
+  // the client data is saved in db and an email is sent to the client about the meeting details and for further updates.
   const handleSubmit = async (e) => {
     setBooking(true)
     e.preventDefault()
@@ -90,20 +96,22 @@ export default function SelectTimeSlot() {
               <Calendar
               aria-label="Date (Uncontrolled)"
               value={selectedDate}
-              onChange={handleDateChange}
+              onChange={setSelectedDate}
               defaultValue={today(getLocalTimeZone())}
               minValue={today(getLocalTimeZone())}
               />
             </div>
           </div>
           <div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
-              {slots?.map((slot)=>(
-                <button key={slot._id} onClick={()=> handleTimeSlotSelect(slot)}>
-                  <SlotCard startTime={slot.startTime} endTime={slot.endTime} price={slot?.price} paid={slot?.paid} selected={selectedTimeSlot?._id === slot._id} />
-                </button>
-              ))}
-            </div>
+            {slots.length > 0 ? (
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+                {slots?.map((slot)=>(
+                  <button key={slot._id} onClick={()=> handleTimeSlotSelect(slot)}>
+                    <SlotCard startTime={slot.startTime} endTime={slot.endTime} price={slot?.price} paid={slot?.paid} selected={selectedTimeSlot?._id === slot._id} />
+                  </button>
+                ))}
+              </div>
+            )  : (<div className="font-md text-white"> No Slots available </div>)}
             {selectedTimeSlot && (
               <form onSubmit={handleSubmit} className="mt-8 space-y-4 text-white ">
                 <div>

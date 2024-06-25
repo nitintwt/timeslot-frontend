@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useSyncExternalStore } from 'react'
 import {Input, user} from "@nextui-org/react";
 import {Button, ButtonGroup} from "@nextui-org/button";
-import TimeSlotPreviewCard from './TimeSlotPreviewCard.jsx'
+import SlotPreviewCard from './SlotPreviewCard.jsx'
 import { useDispatch , useSelector} from 'react-redux';
 import { createSlot, deleteAllSlots } from '@/store/slotsSlice.js';
 import { Calendar } from '@nextui-org/calendar';
@@ -12,7 +12,7 @@ import { Toaster, toast } from 'sonner';
 import {today, getLocalTimeZone} from "@internationalized/date";
 
 
-function InputSlotsTime() {
+function CreateSlots() {
   const [startTime , setStartTime]= useState('')
   const [endTime , setEndTime]= useState('')
   const [date , setDate]= useState()
@@ -20,17 +20,18 @@ function InputSlotsTime() {
   const [price , setPrice]= useState(0)
   const dispatch = useDispatch()
   const slots = useSelector((state)=> state?.slots?.slots)
-  const userId = useSelector((state)=> state?.user?.userDbId)
   const {user}= useUser()
+  const userDbId = sessionStorage.getItem('userDbId')
 
-  const formateDate = ()=>{
+  // the date format from the calender component is unreadble by human , so updated the date to make it readable
+  const formateDate = (date)=>{
     const day = date?.day
     const month = date?.month
     const year = date?.year
 
     return `${day}/${month}/${year}`
   }
-  console.log(userId)
+  console.log(userDbId)
   
   // delete whole slots in the redux store , when user selects a different date
   useEffect(()=>{
@@ -42,7 +43,7 @@ function InputSlotsTime() {
   useEffect(()=>{
     const fetchUserDetails = async ()=>{
       const userDetails = await axios.get("/api/v1/users/getUserDetails" , {params: {email: user?.emailAddresses?.[0]?.emailAddress}})
-      if (paid =="true" &&  userDetails?.data?.data?.stripeAccountId== null) {
+      if (paid &&  userDetails?.data?.data?.stripeAccountId== null) {
         toast.warning("Please link your Stripe account first. Go to Billing Page.")
       }
     }
@@ -58,7 +59,7 @@ function InputSlotsTime() {
         paid: paid,
         price:price,
         date: formateDate(date),
-        creator: userId
+        creator: userDbId
       }))
     } else{
       toast.warning('Please fill the input areas properly')
@@ -69,6 +70,7 @@ function InputSlotsTime() {
      setPrice('')
   }
 
+  // slots array which I get from the redux store is saved in db
   const handleCreateSlot = async ()=>{
     try {
       const savedSlotsInDb = await axios.post("/api/v1/slot/createSlot" , {slots})
@@ -81,6 +83,7 @@ function InputSlotsTime() {
       toast.success("Slots created Successfully")
     } catch (error) {
       console.log("Something went wrong while saving slots in db" , error)
+      toast.error("Something went wrong while creating your slots. Please try again.")
     }
   }
 
@@ -113,17 +116,17 @@ function InputSlotsTime() {
             value={paid}
             onChange={(e) => setPaid(e.target.value)}
             >
-              <SelectItem key="true" value="true">
+              <SelectItem key="true" value={true}>
                 True
               </SelectItem>
-              <SelectItem key="false" value="false">
+              <SelectItem key="false" value={false}>
                 False
               </SelectItem>
             </Select>
           </div>
-          {paid =="true" ? (
+          { paid  &&
             <Input className='pt-8 w-[50%] text-white' type="number" variant='bordered' label="Price of Slot" value={price} onChange={(e)=> setPrice(e.target.value)} />
-          ):('')}
+          }
           <div className='text-white p-8 flex justify-end'>
             <Button color="primary" onClick={handleSubmit}>
             Create
@@ -133,7 +136,7 @@ function InputSlotsTime() {
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
              {
               slots.map((slot)=>(
-                <TimeSlotPreviewCard
+                <SlotPreviewCard
                 key={Math.random()}
                 startTime={slot?.startTime}
                 endTime={slot?.endTime}
@@ -151,10 +154,9 @@ function InputSlotsTime() {
           }
         </div>
         <Toaster position="bottom-center" />
-      </div>
-      
+      </div>  
     </div>
   )
 }
 
-export default InputSlotsTime
+export default CreateSlots

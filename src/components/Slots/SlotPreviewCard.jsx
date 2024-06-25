@@ -4,12 +4,13 @@ import { MdDelete } from "react-icons/md";
 import { useDispatch } from 'react-redux';
 import { deleteSlot } from '@/store/slotsSlice';
 
-function TimeSlotPreviewCard({startTime , endTime , paid , price}) {
+function SlotPreviewCard({startTime , endTime , paid , price}) {
   const dispatch = useDispatch()
 
   const handleDelete= ()=>{
     dispatch(deleteSlot(startTime))
   }
+  
   return (
     <Card>
       <CardBody >
@@ -35,4 +36,4 @@ function TimeSlotPreviewCard({startTime , endTime , paid , price}) {
   )
 }
 
-export default TimeSlotPreviewCard
+export default SlotPreviewCard
