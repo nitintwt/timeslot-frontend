@@ -23,8 +23,8 @@ function Home() {
           })
           toast.success(saveUserInDb?.data?.message)
           sessionStorage.setItem('databaseCallMade', 'true');
-          sessionStorage.setItem('userDBId' ,saveUserInDb?.data?.data?._id )
-          //console.log(saveUserInDb)
+          sessionStorage.setItem('userDbId' ,saveUserInDb?.data?.data?._id )
+          console.log(saveUserInDb?.data?.data?._id)
         } catch (error) {
           console.log(error)
         }

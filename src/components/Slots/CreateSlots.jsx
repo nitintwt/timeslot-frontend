@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useUser } from '@clerk/clerk-react';
 import { Toaster, toast } from 'sonner';
 import {today, getLocalTimeZone} from "@internationalized/date";
+import UsernameInput from './UsernameInput.jsx';
 
 
 function CreateSlots() {
@@ -18,6 +19,7 @@ function CreateSlots() {
   const [date , setDate]= useState()
   const [paid , setPaid]= useState(false)
   const [price , setPrice]= useState(0)
+  const [userNameExist , setUserNameExist]= useState(false)
   const dispatch = useDispatch()
   const slots = useSelector((state)=> state?.slots?.slots)
   const {user}= useUser()
@@ -31,7 +33,6 @@ function CreateSlots() {
 
     return `${day}/${month}/${year}`
   }
-  console.log(userDbId)
   
   // delete whole slots in the redux store , when user selects a different date
   useEffect(()=>{
@@ -42,8 +43,12 @@ function CreateSlots() {
   // fetch the user details from the db ,, and checks whether the user has linked his stripe account or not
   useEffect(()=>{
     const fetchUserDetails = async ()=>{
-      const userDetails = await axios.get("/api/v1/users/getUserDetails" , {params: {email: user?.emailAddresses?.[0]?.emailAddress}})
-      if (paid &&  userDetails?.data?.data?.stripeAccountId== null) {
+      const userDetails = await axios.get("/api/v1/users/getUserDetails" , {params: {userDbId: userDbId}})
+      console.log(userDetails?.data?.data?.userName)
+      if (!userDetails?.data?.data?.userName== null) {
+        setUserNameExist(true)
+      }
+      if (paid=='true' &&  userDetails?.data?.data?.stripeAccountId== null) {
         toast.warning("Please link your Stripe account first. Go to Billing Page.")
       }
     }
@@ -89,6 +94,7 @@ function CreateSlots() {
 
   return (
     <div className=" bg-black dark p-4 md:p-8 space-y-6 overflow-auto">
+       {userNameExist  && <UsernameInput />}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2">
         <div className=" flex justify-center m-12 ">
           <div className="transform scale-125 p-4">
@@ -124,7 +130,7 @@ function CreateSlots() {
               </SelectItem>
             </Select>
           </div>
-          { paid  &&
+          { paid=='true'  &&
             <Input className='pt-8 w-[50%] text-white' type="number" variant='bordered' label="Price of Slot" value={price} onChange={(e)=> setPrice(e.target.value)} />
           }
           <div className='text-white p-8 flex justify-end'>
