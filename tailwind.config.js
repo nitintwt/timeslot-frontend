@@ -11,6 +11,7 @@ export default {
     extend: {
       fontFamily: {
         karla: ['Karla', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
         'cactus-classical-serif': ['Cactus Classical Serif', 'serif'],
         'lxgw-wenkai-tc': ['LXGW WenKai TC', 'cursive'],
         // Define 'karla' as a custom font family with 'Karla' as the primary font and fallback to 'sans-serif'

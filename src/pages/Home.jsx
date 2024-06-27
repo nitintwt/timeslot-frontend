@@ -27,6 +27,7 @@ function Home() {
           console.log(saveUserInDb?.data?.data?._id)
         } catch (error) {
           console.log(error)
+          toast.error("Something went wrong while registering. Please re-login.")
         }
       }
       userRegisterInDb()

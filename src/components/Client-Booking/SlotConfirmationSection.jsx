@@ -7,6 +7,7 @@ import axios from "axios";
 import { useUser } from '@clerk/clerk-react'
 import SlotCard from "./SlotCard";
 import { Link, useParams } from "react-router-dom";
+import {Textarea} from "@nextui-org/react";
 
 export default function SelectTimeSlot() {
   const [selectedDate, setSelectedDate] = useState(today(getLocalTimeZone()))
@@ -14,6 +15,7 @@ export default function SelectTimeSlot() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [slots , setSlots]= useState([])
+  const [reason , setReason]= useState(null)
   const [booking , setBooking]= useState(false)
   const [booked , setBooked]= useState(false)
   const {user}= useUser()
@@ -59,7 +61,8 @@ export default function SelectTimeSlot() {
       const bookSlot = await axios.post("/api/v1/customer/bookSlot" , {
         email: email,
         name: name,
-        slotId : selectedTimeSlot._id
+        slotId : selectedTimeSlot._id, 
+        reason: reason
       })
       console.log("Slot booking done" , bookSlot)
       const sendMail = await axios.post("/api/v1/customer/sendmail", {
@@ -121,6 +124,15 @@ export default function SelectTimeSlot() {
                 </div>
                 <div>
                   <Input id="email" type="email" variant="bordered" label='Your Email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+                <div>
+                <Textarea
+                  label="Description"
+                  placeholder="Describe reason for meeting"
+                  variant="underlined"
+                  value={reason}
+                  onChange={(e)=> setReason(e.target.value)}
+                />
                 </div>
                 {booking ? (
                   <Button type="submit" className="w-full" color="primary" variant="shadow" isLoading >

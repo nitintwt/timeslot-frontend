@@ -14,7 +14,7 @@ import { IoIosCreate } from "react-icons/io";
 export default function Sidebar() {
   // bg-muted , text-primary 
   return (
-    <div className="grid min-h-screen  w-full md:grid-cols-[220px_1fr] lg:grid-cols-[200px_1fr] font-lxgw-wenkai-tc" >
+    <div className="grid min-h-screen  w-full md:grid-cols-[180px_1fr] lg:grid-cols-[180px_1fr] font-roboto" >
       <div className="hidden md:block" style={{background:'#0a0a0a'}}>
         <div className="flex dark h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center  px-4 lg:h-[60px] lg:px-6">
@@ -23,7 +23,7 @@ export default function Sidebar() {
             </NavLink>
           </div>
           <div className="flex-1">
-            <nav className="grid items-start px-2 text-m font-medium lg:px-4">
+            <nav className="grid items-start px-2 font-medium lg:px-4">
               <NavLink to="/dashboard" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}} >
               <GoGraph size={21}/>
                Dashboard
@@ -40,8 +40,8 @@ export default function Sidebar() {
                 <IoTime size={21}/>
                 Availability
               </NavLink>
-              <NavLink to="/billing" className="flex text-lg items-center gap-2 rounded-lg  px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}> 
-                <MdOutlineAttachMoney size={25} />
+              <NavLink to="/billing" className="flex  items-center gap-2 rounded-lg  px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}> 
+                <MdOutlineAttachMoney size={23} />
                 Billing
               </NavLink>
               <NavLink to="/settings" className="flex items-center gap-3 rounded-lg px-3 py-2 pb-5 text-neutral-400 transition-all hover:text-white" style={({ isActive }) => {return isActive ? { color: 'white' } : {};}}>
