@@ -1,21 +1,17 @@
 import React from 'react'
+import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 
 function TotalMeetingTimeCard() {
   return (
-    <Card>
-    <CardHeader className="pb-3">
-      <CardTitle>Total Meeting Time</CardTitle>
-      <CardDescription className="max-w-lg text-balance leading-relaxed">
-        Total meeting time spent in the last 28 days.
-      </CardDescription>
-    </CardHeader>
-    <CardContent>
-      <div className="flex flex-col items-center justify-center h-full">
-        <div className="text-4xl font-bold">45 hours</div>
-        <div className="text-muted-foreground">Last 28 days</div>
-      </div>
-    </CardContent>
-  </Card>
+    <Card x-chunk="dashboard-05-chunk-1">
+      <CardHeader className="pb-2">
+        <h1>This Week</h1>
+        <h2 className="text-4xl">$1,329</h2>
+      </CardHeader>
+      <CardFooter>
+        <div className="text-xs text-muted-foreground">+25% from last week</div>
+      </CardFooter>
+    </Card>
   )
 }
 
