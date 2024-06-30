@@ -15,8 +15,6 @@ import {Link} from "@nextui-org/react";
 import { MdPersonOff } from "react-icons/md";
 import {Divider} from "@nextui-org/divider";
 
-
-
 function CreateSlots() {
   const [startTime , setStartTime]= useState('')
   const [endTime , setEndTime]= useState('')
