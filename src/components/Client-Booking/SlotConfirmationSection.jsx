@@ -8,6 +8,7 @@ import { useUser } from '@clerk/clerk-react'
 import SlotCard from "./SlotCard";
 import { Link, useParams } from "react-router-dom";
 import {Textarea} from "@nextui-org/react";
+import { Toaster, toast } from 'sonner';
 
 export default function SelectTimeSlot() {
   const [selectedDate, setSelectedDate] = useState(today(getLocalTimeZone()))
@@ -57,6 +58,7 @@ export default function SelectTimeSlot() {
   const handleSubmit = async (e) => {
     setBooking(true)
     e.preventDefault()
+    const formattedDate = formatDate(selectedDate);
     try {
       const bookSlot = await axios.post("/api/v1/customer/bookSlot" , {
         email: email,
@@ -65,15 +67,21 @@ export default function SelectTimeSlot() {
         reason: reason
       })
       console.log("Slot booking done" , bookSlot)
+      const setCalenderEvent = await axios.post("/api/v1/google/scheduleEvent" , {
+        userName: username , client : name , clientEmail: email , date: formattedDate , timeSlot:selectedTimeSlot._id , meetReason: reason,
+      })
+      console.log("Calender event done" , setCalenderEvent.data.data.data.hangoutLink)
       const sendMail = await axios.post("/api/v1/customer/sendmail", {
         clientEmail: email,
         clientName:name,
         slotId: selectedTimeSlot._id,
+        meetLink: setCalenderEvent.data.data.data.hangoutLink
       })
       setBooked(true)
       console.log("mail sent successfully" , sendMail)
     } catch (error) {
       console.log("Something went wrong while booking slot" , error)
+      toast.error("Something went wrong while booking your slot. Please try again")
     }
   }
 
@@ -147,6 +155,7 @@ export default function SelectTimeSlot() {
             )}
           </div>
         </div>
+        <Toaster position="bottom-center" />
       </div>
       )}
       </Fragment>
