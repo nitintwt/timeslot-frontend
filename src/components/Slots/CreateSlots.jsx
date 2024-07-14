@@ -21,8 +21,7 @@ function CreateSlots() {
   const [date , setDate]= useState()
   const [paid , setPaid]= useState(false)
   const [price , setPrice]= useState(0)
-  const [userNameExist , setUserNameExist]= useState(false)
-  const [userName , setUserName]= useState('')
+  
   const dispatch = useDispatch()
   const slots = useSelector((state)=> state?.slots?.slots)
   const userDbId = sessionStorage.getItem('userDbId')
@@ -35,7 +34,7 @@ function CreateSlots() {
 
     return `${day}/${month}/${year}`
   }
-  
+  console.log('date', formatDate(date))
   // delete whole slots in the redux store , when user selects a different date
   useEffect(()=>{
     dispatch(deleteAllSlots())
@@ -46,16 +45,12 @@ function CreateSlots() {
       const fetchUserDetails = async ()=>{
         const userDetails = await axios.get("/api/v1/users/getUserDetails" , {params: {userDbId: userDbId}})
         console.log(userDetails?.data?.data?.userName)
-        if (userDetails?.data?.data?.userName) {
-          setUserNameExist(true)
-          setUserName(userDetails?.data?.data?.userName)
-        }
         if (paid=='true' &&  userDetails?.data?.data?.stripeAccountId== null) {
           toast.warning("Please link your Stripe account first. Go to Billing Page.")
         }
       }
       fetchUserDetails()
-    },[paid , userNameExist])
+    },[paid ])
 
 
 
@@ -98,15 +93,6 @@ function CreateSlots() {
 
   return (
     <div className=" bg-black dark p-4 md:p- space-y-6 overflow-auto">
-            {userNameExist ? (
-        <div className='flex m-5'>
-          <label className='text-white'>Link of your booking page : </label>
-          <p className='ml-2'>
-            <Link href={`/${userName}`}> {`localhost:3000/${userName}`}</Link>
-          </p>
-        </div>
-        ) : (<UsernameInput />)}
-
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2">
         <div className=" flex flex-col  items-center m-12 ">
           <div className="transform scale-125 p-4 mb-5">
