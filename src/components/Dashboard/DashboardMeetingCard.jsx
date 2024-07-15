@@ -11,6 +11,7 @@ function DashboardMeetingCard() {
       try {
         const meetings = await axios.get(`/api/v1/users/totalNumberOfMeetingsOfLast28Days?userDbId=${userDbId}`)
         setNumberOfMeetings(meetings?.data?.data)
+        console.log(meetings)
       } catch (error) {
         console.log("Something went wrong while fetching meetings data" , error)
       }

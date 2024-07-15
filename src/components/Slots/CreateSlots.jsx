@@ -28,11 +28,11 @@ function CreateSlots() {
 
   // the date format from the calender component is unreadble by human , so updated the date to make it readable
   const formatDate = (selectedDate)=>{
-    const day = selectedDate?.day
-    const month = selectedDate?.month
+    const day = selectedDate?.day.toString().padStart(2, '0');
+    const month = selectedDate?.month.toString().padStart(2, '0');
     const year = selectedDate?.year
 
-    return `${day}/${month}/${year}`
+    return `${year}-${month}-${day}`
   }
   console.log('date', formatDate(date))
   // delete whole slots in the redux store , when user selects a different date

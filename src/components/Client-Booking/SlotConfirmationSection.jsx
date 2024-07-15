@@ -22,12 +22,13 @@ export default function SelectTimeSlot() {
   const {user}= useUser()
   const {username}= useParams()
 
-  const formatDate = (date) => {
-    if (!date) return "";
-    const day = date.day;
-    const month = date.month;
-    const year = date.year;
-    return `${day}/${month}/${year}`;
+
+  const formatDate = (selectedDate)=>{
+    const day = selectedDate?.day.toString().padStart(2, '0');
+    const month = selectedDate?.month.toString().padStart(2, '0');
+    const year = selectedDate?.year
+
+    return `${year}-${month}-${day}`
   }
 
   // fetch all slots which are available according to the selected date

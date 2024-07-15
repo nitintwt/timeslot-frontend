@@ -1,17 +1,25 @@
-import React, { useEffect , useState} from 'react'
+import React, { useEffect , useState } from 'react'
+import { useLocation } from 'react-router-dom';
 import {Input} from "@nextui-org/input";
 import {Button, ButtonGroup} from "@nextui-org/button";
 import { useUser } from '@clerk/clerk-react';
 import axios from 'axios';
 import {Link} from "@nextui-org/react";
+import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
+import { Cookie } from 'lucide-react';
 
 function UserInfoCard() {
   const {user}= useUser()
   const [userName , setUserName]= useState('')
   const userDbId = sessionStorage.getItem('userDbId')
   const [userNameExist , setUserNameExist]= useState(false)
+  const [tokensExist , setTokenExist]= useState(false)
+  const location = useLocation();
+
 
   useEffect(()=>{
+    const query = new URLSearchParams(location.search);
+    const code = query.get('code');
     const fetchUserDetails = async ()=>{
       try {
         const userDetails = await axios.get(`/api/v1/users/getUserDetails?userDbId=${userDbId}`)
@@ -19,8 +27,16 @@ function UserInfoCard() {
           setUserNameExist(true)
           setUserName(userDetails?.data?.data?.userName)
         }
+        if (!userDetails?.data?.data?.tokens){
+          const createGoogleTokens = await axios.post(`/api/v1/google/redirect?code=${code}`, {userDbId})
+          console.log(createGoogleTokens)
+        }
+        setTokenExist(true)
+        query.delete('code');
       } catch (error) {
         console.log("Something went wrong while fetching user details" , error)
+        query.delete('code');
+        history.replace({ search: query.toString() });
       }
     }
     fetchUserDetails()
@@ -29,6 +45,7 @@ function UserInfoCard() {
   return (
   <div className="flex text-white ml-1 w-full max-w-[400px] flex-col gap-6 border- bg-background p-6 sm:p-8 md:p-10 md:border-l-0 md:border-t">
     <div className="flex items-center gap-4">
+      <Avatar src={user?.imageUrl}/>
       <div className="grid gap-1">
         <div className="font-medium">{user?.fullName}</div>
         <div className="text-sm text-muted-foreground">{user?.emailAddresses?.[0]?.emailAddress}</div>
@@ -57,9 +74,15 @@ function UserInfoCard() {
               <ChromeIcon className="h-5 w-5" />
               <div>Google</div>
             </div>
-            <Button variant="outline" size="sm">
-              Disconnect
-            </Button>
+            {tokensExist ? (
+            <Link variant="outline" size="sm">
+              disconnect
+            </Link>
+            ): (
+            <Link variant="outline" size="sm" href='/api/v1/google/OAuth'>
+              connect
+            </Link>
+            )}
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
