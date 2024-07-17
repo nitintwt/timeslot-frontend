@@ -1,6 +1,6 @@
 import DashboardEarningsCard from "../components/Dashboard/DashboardEarningsCard";
 import DashboardMeetingCard from "../components/Dashboard/DashboardMeetingCard";
-import CustomerInfoCard from "../components/Dashboard/CustomerInfoCard";
+import CustomerInfoCard from "@/components/Dashboard/CustomerInfoCard";
 import UserInfoCard from "../components/Dashboard/UserInfoCard";
 
 

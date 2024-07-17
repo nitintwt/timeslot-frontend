@@ -87,20 +87,20 @@ function UserInfoCard() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <SquareStackIcon className="h-5 w-5" />
-              <div>Stripe</div>
+              <div>Razorpay</div>
             </div>
-            <Button variant="outline" size="sm">
-              Disconnect
-            </Button>
+            <Link variant="outline" size="sm">
+              disconnect
+            </Link>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <CitrusIcon className="h-5 w-5" />
               <div>LemonSqueezy</div>
             </div>
-            <Button variant="outline" size="sm">
-              Disconnect
-            </Button>
+            <Link variant="outline" size="sm">
+              disconnect
+            </Link>
           </div>
         </div>
       </div>
