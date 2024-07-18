@@ -1,31 +1,34 @@
-import React from 'react'
-import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
+import React, { useEffect, useState } from 'react'
+import BookingSlotCard from './BookingSlotCard'
+import axios from 'axios'
+
 
 function UpcomingBookings() {
+  const [slots , setSlots]= useState([])
+  const userDbId = sessionStorage.getItem('userDbId')
+
+  useEffect(()=>{
+    const fetchUpcomingSlots = async ()=>{
+      try {
+        const data = await axios.get(`/api/v1/slot/upcomingSlots?userDbId=${userDbId}`)
+        console.log(data)
+      } catch (error) {
+        console.log("Something went wrong while fetching upcoming slots" , error)
+      }
+    }
+    fetchUpcomingSlots()
+  } , [userDbId])
+  
   return (
     <div className="grid gap-4">
-      <Card>
-        <CardBody className="grid gap-4">
-          <div className="flex items-center justify-between">
-            <h1 className="font-medium">John Doe</h1>
-            <h2 className="text-muted-foreground">john@example.com</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-2">
-            <div>
-              <div className="text-sm text-muted-foreground">Slot Duration</div>
-              <div>1 hour</div>
-            </div>
-            <div>
-              <div className="text-sm text-muted-foreground">Booking Date</div>
-              <div>2023-06-15</div>
-            </div>
-          </div>
-          <div>
-            <div className="text-sm text-muted-foreground">Reason for Booking</div>
-            <div>Consultation for new product launch strategy.</div>
-          </div>
-        </CardBody>
-      </Card>
+      {slots.length > 0 ? (
+        slots.map((slot)=>(
+          <BookingSlotCard customerName={customer.name} customerEmail={customer.email}  reasonOfBooking={customer.reason} slotId={slot._id}/>
+        ))
+      ) : (
+        <h1 className='text-xl font-bold text-white'>No Slots</h1>
+      )}
+
     </div>
   )
 }
