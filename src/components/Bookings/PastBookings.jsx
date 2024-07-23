@@ -1,5 +1,6 @@
-import React , {useState} from 'react'
-import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
+import React , {useState , useEffect} from 'react'
+import BookingSlotCard from './BookingSlotCard'
+import axios from 'axios';
 
 function PastBookings() {
   const [slots , setSlots]= useState([])
@@ -9,7 +10,7 @@ function PastBookings() {
     const fetchPastSlots = async ()=>{
       try {
         const data = await axios.get(`/api/v1/slot/pastSlots?userDbId=${userDbId}`)
-        console.log(data)
+        setSlots(data?.data?.data)
       } catch (error) {
         console.log("Something went wrong while fetching upcoming slots" , error)
       }
@@ -21,7 +22,7 @@ function PastBookings() {
     <div className="grid gap-4">
       {slots.length > 0 ? (
         slots.map((slot)=>(
-          <BookingSlotCard customerName={customer.name} customerEmail={customer.email}  reasonOfBooking={customer.reason} slotId={slot._id}/>
+          <BookingSlotCard  slotId={slot._id} slotStartTime={slot.startTime} slotEndTime={slot.endTime} date={slot.date}/>
         ))
       ) : (
         <h1 className='text-xl font-bold text-white'>No Slots</h1>

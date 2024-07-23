@@ -11,7 +11,7 @@ function UpcomingBookings() {
     const fetchUpcomingSlots = async ()=>{
       try {
         const data = await axios.get(`/api/v1/slot/upcomingSlots?userDbId=${userDbId}`)
-        console.log(data)
+        setSlots(data.data.data)
       } catch (error) {
         console.log("Something went wrong while fetching upcoming slots" , error)
       }
@@ -23,12 +23,11 @@ function UpcomingBookings() {
     <div className="grid gap-4">
       {slots.length > 0 ? (
         slots.map((slot)=>(
-          <BookingSlotCard customerName={customer.name} customerEmail={customer.email}  reasonOfBooking={customer.reason} slotId={slot._id}/>
+          <BookingSlotCard  slotId={slot._id} slotStartTime={slot.startTime} slotEndTime={slot.endTime} date={slot.date}/>
         ))
       ) : (
         <h1 className='text-xl font-bold text-white'>No Slots</h1>
       )}
-
     </div>
   )
 }

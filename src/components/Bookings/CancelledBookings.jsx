@@ -1,14 +1,29 @@
-import React , {useState} from 'react'
+import React , {useState , useEffect} from 'react'
+import axios from 'axios';
+import BookingSlotCard from './BookingSlotCard'
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 
 function CancelledBookings() {
-  const [bookings , setBookings]= useState([])
+  const [slots , setSlots]= useState([])
+  const userDbId = sessionStorage.getItem('userDbId')
+
+  useEffect(()=>{
+    const fetchPastSlots = async ()=>{
+      try {
+        const data = await axios.get(`/api/v1/slot/cancelledSlots?userDbId=${userDbId}`)
+        setSlots(data?.data?.data)
+      } catch (error) {
+        console.log("Something went wrong while fetching cancelled slots" , error)
+      }
+    }
+    fetchPastSlots()
+  } , [userDbId])
 
   return (
     <div className="grid gap-4">
-      {bookings.length > 0 ? (
-        bookings.map((booking)=>(
-          <BookingSlotCard clientName={booking.name} clientEmail={booking.email} slotDuration={booking.startTime} date={booking.date} reasonOfBooking={booking.reason}/>
+      {slots.length > 0 ? (
+        slots.map((slot)=>(
+          <BookingSlotCard  slotId={slot._id} slotStartTime={slot.startTime} slotEndTime={slot.endTime} date={slot.date}/>
         ))
       ) : (
         <h1 className='text-xl font-bold text-white'>No Slots</h1>
