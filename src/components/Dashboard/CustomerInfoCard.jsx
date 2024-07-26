@@ -1,8 +1,9 @@
-
+import React, { useEffect, useState } from 'react'
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
-import {  Table,  TableHeader,  TableBody,  TableColumn,  TableRow,  TableCell} from "@nextui-org/table";
+import axios from 'axios';
 
 export default function Component() {
+  const userDbId = sessionStorage.getItem('userDbId')
   const customers = [
     {
       id: 1,
@@ -34,40 +35,52 @@ export default function Component() {
       email: "michael@example.com",
       bookedSlots: 4,
     },
-  ]
+  ];
+
+  useEffect (()=>{
+    const fetchAllCustomersData = async ()=>{
+      try {
+        const data = await axios.get(`/api/v1/users/getAllCustomersData?userDbId=${userDbId}`)
+        console.log(data)
+      } catch (error) {
+        console.log("Something went wrong while fetching customer data" , error)
+      }
+    }
+    fetchAllCustomersData()
+  }, [userDbId])
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <h1>Customer Data</h1>
-        <h2>View and manage customer information and booked slots.</h2>
+    <Card className="w-full shadow-lg rounded-lg overflow-hidden">
+      <CardHeader className="bg-black text-white p-4">
+        <h1 className="text-2xl font-semibold">Customer Data <br/> <p className="text-lg text-gray-400"> View your customers information.</p></h1>
       </CardHeader>
-      <CardBody>
-      <Table>
-        <TableHeader>
-            <TableRow>
-              <TableColumn className="cursor-pointer hover:bg-muted">
-                Name 
-              </TableColumn>
-              <TableColumn  className="cursor-pointer hover:bg-muted">
-                Email 
-              </TableColumn>
-              <TableColumn  className="cursor-pointer hover:bg-muted">
-                Booked Slots 
-              </TableColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {customers.map((customer) => (
-              <TableRow key={customer.id}>
-                <TableCell>{customer.name}</TableCell>
-                <TableCell>{customer.email}</TableCell>
-                <TableCell>{customer.bookedSlots}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      <CardBody className="p-4">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left table-auto">
+            <thead>
+              <tr className="bg-">
+                <th className="p-3 font-medium text-white">Name</th>
+                <th className="p-3 font-medium text-white">Email</th>
+                <th className="p-3 font-medium text-white">Paid</th>
+              </tr>
+            </thead>
+            <tbody>
+              {customers.map((customer, index) => (
+                <tr
+                  key={customer.id}
+                  className='hover:bg-black transition-colors duration-200'
+                >
+                  <td className="p-3">{customer.name}</td>
+                  <td className="p-3">{customer.email}</td>
+                  <td className="p-3">{customer.bookedSlots}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </CardBody>
     </Card>
-  )
+  );
 }
+
+

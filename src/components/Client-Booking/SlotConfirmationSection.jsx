@@ -22,6 +22,8 @@ export default function SelectTimeSlot() {
   const {user}= useUser()
   const {username}= useParams()
 
+  console.log(username)
+
 
   const formatDate = (selectedDate)=>{
     const day = selectedDate?.day.toString().padStart(2, '0');
@@ -65,7 +67,8 @@ export default function SelectTimeSlot() {
         email: email,
         name: name,
         slotId : selectedTimeSlot._id, 
-        reason: reason
+        reason: reason,
+        slotCreator: username
       })
       console.log("Slot booking done" , bookSlot)
       const setCalenderEvent = await axios.post("/api/v1/google/scheduleEvent" , {

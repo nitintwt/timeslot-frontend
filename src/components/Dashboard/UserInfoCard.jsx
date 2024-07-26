@@ -42,8 +42,17 @@ function UserInfoCard() {
     fetchUserDetails()
   },[userDbId])
 
+  const submitUsername = async ()=>{
+    try {
+      const subitData =  await axios.post('/api/v1/users/setUsername' , {username: userName, userDbId: userDbId})
+      console.log(subitData)
+    } catch (error) {
+      console.log('Something went wrong while submitting username' , error)
+    }
+  }
+
   return (
-  <div className="flex text-white ml-1 w-full max-w-[400px] flex-col gap-6 border- bg-background p-6 sm:p-8 md:p-10 md:border-l-0 md:border-t">
+  <div className="flex text-white ml-1 w-full  max-w-[400px] flex-col gap-6 border- bg-background p-6 sm:p-8 md:p-10 md:border-l-0 md:border-t">
     <div className="flex items-center gap-4">
       <Avatar src={user?.imageUrl}/>
       <div className="grid gap-1">
@@ -62,7 +71,8 @@ function UserInfoCard() {
       ) : (
       <div className="grid gap-2">
         <h2 htmlFor="username">Username</h2>
-        <Input description='username will link to your booking page.For example: timeslot.com/john' defaultValue={userName}/>
+        <Input description='username will link to your booking page.For example: timeslot.com/john' defaultValue={userName} onChange={(e)=> setUserName(e.target.value)}/>
+        <Button onClick={submitUsername}>Submit</Button>
       </div>
       )}
       <hr/>
@@ -74,15 +84,11 @@ function UserInfoCard() {
               <ChromeIcon className="h-5 w-5" />
               <div>Google</div>
             </div>
-            {tokensExist ? (
-            <Link variant="outline" size="sm">
-              disconnect
-            </Link>
-            ): (
+
             <Link variant="outline" size="sm" href='/api/v1/google/OAuth'>
               connect
             </Link>
-            )}
+            
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
