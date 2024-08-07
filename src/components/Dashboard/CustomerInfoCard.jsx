@@ -1,47 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useSyncExternalStore } from 'react'
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import axios from 'axios';
 
 export default function Component() {
   const userDbId = sessionStorage.getItem('userDbId')
-  const customers = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      bookedSlots: 3,
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane@example.com",
-      bookedSlots: 1,
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      bookedSlots: 5,
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      email: "emily@example.com",
-      bookedSlots: 2,
-    },
-    {
-      id: 5,
-      name: "Michael Brown",
-      email: "michael@example.com",
-      bookedSlots: 4,
-    },
-  ];
+  const [customers , setCustomers]= useState([])
 
   useEffect (()=>{
     const fetchAllCustomersData = async ()=>{
       try {
         const data = await axios.get(`/api/v1/users/getAllCustomersData?userDbId=${userDbId}`)
-        console.log(data)
+        console.log(data.data.data)
+        setCustomers(data.data.data)
+        
       } catch (error) {
         console.log("Something went wrong while fetching customer data" , error)
       }
@@ -70,8 +41,8 @@ export default function Component() {
                   key={customer.id}
                   className='hover:bg-black transition-colors duration-200'
                 >
-                  <td className="p-3">{customer.name}</td>
-                  <td className="p-3">{customer.email}</td>
+                  <td className="p-3">{customer.customerName}</td>
+                  <td className="p-3">{customer.customerEmail}</td>
                   <td className="p-3">{customer.bookedSlots}</td>
                 </tr>
               ))}

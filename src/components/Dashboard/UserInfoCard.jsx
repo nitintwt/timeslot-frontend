@@ -27,6 +27,7 @@ function UserInfoCard() {
           setUserNameExist(true)
           setUserName(userDetails?.data?.data?.userName)
         }
+        console.log("Userdetails" , userDetails)
         if (!userDetails?.data?.data?.tokens){
           const createGoogleTokens = await axios.post(`/api/v1/google/redirect?code=${code}`, {userDbId})
           console.log(createGoogleTokens)
@@ -84,10 +85,15 @@ function UserInfoCard() {
               <ChromeIcon className="h-5 w-5" />
               <div>Google</div>
             </div>
-
-            <Link variant="outline" size="sm" href='/api/v1/google/OAuth'>
+            { tokensExist ? (
+              <Link variant="outline" size="sm" >
+                connected
+              </Link>
+            ): (
+              <Link variant="outline" size="sm" href='/api/v1/google/OAuth'>
               connect
             </Link>
+            )}
             
           </div>
           <div className="flex items-center justify-between">

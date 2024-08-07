@@ -6,7 +6,7 @@ import CancelledBookings from "@/components/Bookings/CancelledBookings";
 
 function Bookings() {
   return (
-    <div className="bg-black h-screen">
+    <div className="bg-black h-screen" >
       <div className=" absolute top-8 left-15 w-full max-w-4xl  mx-auto py-8 dark p-2">
         <Tabs defaultValue="upcoming" >
           <Tab key='upcoming' title='Upcoming'>

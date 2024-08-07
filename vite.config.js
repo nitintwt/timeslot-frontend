@@ -6,10 +6,10 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server:{
     proxy:{
-      '/api/v1/customer':'http://localhost:3000',
-      '/api/v1/users':'http://localhost:3003',
-      '/api/v1/slot':'http://localhost:3003',
-      '/api/v1/google':'http://localhost:3002',
+      '/api/v1/customer':'https://9dgwr80go2.execute-api.us-east-1.amazonaws.com/timeslot/client',
+      '/api/v1/users':'https://9dgwr80go2.execute-api.us-east-1.amazonaws.com/timeslot/users',
+      '/api/v1/slot':'https://9dgwr80go2.execute-api.us-east-1.amazonaws.com/timeslot/users',
+      '/api/v1/google':'https://9dgwr80go2.execute-api.us-east-1.amazonaws.com/timeslot/google',
     }
 
   },
