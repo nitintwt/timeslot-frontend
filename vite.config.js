@@ -2,16 +2,16 @@ import path from "path"
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+
 // https://vitejs.dev/config/
 export default defineConfig({
   server:{
     proxy:{
-      '/api/v1/customer':'https://9dgwr80go2.execute-api.us-east-1.amazonaws.com/timeslot/client',
-      '/api/v1/users':'https://9dgwr80go2.execute-api.us-east-1.amazonaws.com/timeslot/users',
-      '/api/v1/slot':'https://9dgwr80go2.execute-api.us-east-1.amazonaws.com/timeslot/users',
-      '/api/v1/google':'https://9dgwr80go2.execute-api.us-east-1.amazonaws.com/timeslot/google',
+      '/api/v1/customer':process.env.AWS_CLIENT_API,
+      '/api/v1/users':process.env.AWS_USERS_API,
+      '/api/v1/slot':process.env.AWS_SLOT_API,
+      '/api/v1/google':process.env.AWS_GOOGLE_API,
     }
-
   },
   plugins: [react()],
   resolve: {

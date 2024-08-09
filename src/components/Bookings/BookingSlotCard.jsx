@@ -55,7 +55,7 @@ function BookingSlotCard({ slotId , slotStartTime , slotEndTime , date , type}) 
       type ? (
         <div className='flex justify-end p-2 '>
           {cancelled ? (
-            <Button onClick={cancelBooking} color='default'>cancelled</Button>
+            <Button color='default'>cancelled</Button>
           ) :(
             <Button onClick={cancelBooking} color='danger' >cancel</Button>
           )}

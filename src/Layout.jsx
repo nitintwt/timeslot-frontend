@@ -5,7 +5,7 @@ import Sidebar from './components/ui/Sidebar'
 
 function Layout() {
   return (
-    <>
+    < >
     <Sidebar/>
     </>
 

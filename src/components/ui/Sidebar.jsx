@@ -16,7 +16,7 @@ export default function Sidebar() {
   return (
     <div className="grid min-h-screen  w-full md:grid-cols-[180px_1fr] lg:grid-cols-[180px_1fr] font-roboto" >
       <div className="hidden md:block" style={{background:'#0a0a0a'}}>
-        <div className="flex dark h-full max-h-screen flex-col gap-2">
+        <div className="flex dark h-full  max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center  px-4 lg:h-[60px] lg:px-6">
             <NavLink to="/" className="flex items-center gap-2 text-3xl font-semibold">
               <span className="text-white font-bold">TimeSlot</span>
@@ -111,7 +111,7 @@ export default function Sidebar() {
           </SignedIn>
           </div>
         </header>
-        <main className="flex-1 ">
+        <main className="flex-1  bg-black ">
           <Outlet />
         </main>
       </div>
