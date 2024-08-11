@@ -17,6 +17,7 @@ import Customers from './pages/Customers'
 import Slots from './pages/Slots'
 import store from './store/store'
 import BookSlot from './pages/BookSlot'
+import AuthLayout from './components/ui/AuthLayout'
 
 
 const router = createBrowserRouter([
@@ -30,31 +31,58 @@ const router = createBrowserRouter([
       },
       {
         path:'/dashboard',
-        element: <Dashboard/>
+        element: (
+          <AuthLayout>
+            <Dashboard/>
+          </AuthLayout>
+        )
       },
       {
         path:'/bookings',
-        element: <Bookings/>
+        element: (
+          <AuthLayout>
+            <Bookings/>
+          </AuthLayout>
+        )
       },
       {
         path:'/availability',
-        element: <Availability/>
+        element: (
+          <AuthLayout>
+            <Availability/>
+          </AuthLayout>
+        )
       },
       {
         path:'/billing',
-        element: <Billing/>
+        element: (
+          <AuthLayout>
+            <Billing/>
+          </AuthLayout>
+        )
       },
       {
         path:'/settings',
-        element: <Settings/>
+        element: (
+          <AuthLayout>
+            <Settings/>
+          </AuthLayout>
+        )
       },
       {
         path:'/customers',
-        element: <Customers/>
+        element: (
+          <AuthLayout>
+            <Customers/>
+          </AuthLayout>
+        )
       },
       {
         path: '/slots',
-        element: <Slots/>
+        element: 
+        <AuthLayout>
+          <Slots/>
+        </AuthLayout>
       },
       {
         path: '/:username',

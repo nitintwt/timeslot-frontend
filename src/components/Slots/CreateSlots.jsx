@@ -18,7 +18,7 @@ import {Divider} from "@nextui-org/divider";
 function CreateSlots() {
   const [startTime , setStartTime]= useState('')
   const [endTime , setEndTime]= useState('')
-  const [date , setDate]= useState()
+  const [date , setDate]= useState(today(getLocalTimeZone()))
   const [paid , setPaid]= useState(false)
   const [price , setPrice]= useState(0)
   

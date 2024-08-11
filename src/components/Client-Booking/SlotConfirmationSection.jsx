@@ -70,22 +70,22 @@ export default function SelectTimeSlot() {
         reason: reason,
         slotCreator: username
       })
-      console.log("Slot booking done" , bookSlot)
       const setCalenderEvent = await axios.post("/api/v1/google/scheduleEvent" , {
         userName: username , client : name , clientEmail: email , date: formattedDate , timeSlot:selectedTimeSlot._id , meetReason: reason,
       })
-      console.log("Calender event done" , setCalenderEvent.data.data.data.hangoutLink)
+      console.log("Calender event done" , setCalenderEvent.data.data)
       const sendMail = await axios.post("/api/v1/customer/sendmail", {
         clientEmail: email,
         clientName:name,
         slotId: selectedTimeSlot._id,
-        meetLink: setCalenderEvent.data.data.data.hangoutLink
+        meetLink: setCalenderEvent.data.data
       })
       setBooked(true)
       console.log("mail sent successfully" , sendMail)
     } catch (error) {
+      setBooking(false)
       console.log("Something went wrong while booking slot" , error)
-      toast.error("Something went wrong while booking your slot. Please try again")
+      toast.error(error?.response?.data?.errors)
     }
   }
 

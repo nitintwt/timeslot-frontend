@@ -47,6 +47,7 @@ function UserInfoCard() {
     try {
       const subitData =  await axios.post('/api/v1/users/setUsername' , {username: userName, userDbId: userDbId})
       console.log(subitData)
+      setUserNameExist(true)
     } catch (error) {
       console.log('Something went wrong while submitting username' , error)
     }
@@ -94,7 +95,6 @@ function UserInfoCard() {
               connect
             </Link>
             )}
-            
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">

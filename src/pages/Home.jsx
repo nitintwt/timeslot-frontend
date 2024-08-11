@@ -38,7 +38,7 @@ function Home() {
   //console.log(user?.emailAddresses?.[0]?.emailAddress)
   return (
     <div className='bg-black text-white h-screen'>
-     <Toaster position="bottom-center" />
+    <Toaster position="bottom-center" />
     </div>
   )
 }
