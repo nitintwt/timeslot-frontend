@@ -7,13 +7,8 @@ import { createSlot, deleteAllSlots } from '@/store/slotsSlice.js';
 import { Calendar } from '@nextui-org/calendar';
 import { Select, SelectItem } from '@nextui-org/react';
 import axios from 'axios';
-import { useUser } from '@clerk/clerk-react';
 import { Toaster, toast } from 'sonner';
 import {today, getLocalTimeZone} from "@internationalized/date";
-import UsernameInput from './UsernameInput.jsx';
-import {Link} from "@nextui-org/react";
-import { MdPersonOff } from "react-icons/md";
-import {Divider} from "@nextui-org/divider";
 
 function CreateSlots() {
   const [startTime , setStartTime]= useState('')
