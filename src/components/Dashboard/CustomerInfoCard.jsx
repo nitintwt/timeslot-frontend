@@ -12,7 +12,7 @@ export default function Component() {
     const fetchAllCustomersData = async ()=>{
       try {
         const data = await axios.get(`/api/v1/users/getAllCustomersData?userDbId=${userDbId}`)
-        console.log(data.data.data)
+        console.log("cutomers",data.data.data)
         setCustomers(data.data.data)
         setIsloading(false)
       } catch (error) {
@@ -42,7 +42,7 @@ export default function Component() {
               <h1>Loading....</h1>
             ):(
               <tbody>
-                {customers?.map((customer, index) => (
+                {customers.map((customer, index) => (
                   <tr
                     key={customer.id}
                     className='hover:bg-black transition-colors duration-200'

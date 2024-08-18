@@ -17,14 +17,14 @@ function AvailableSlots() {
       }
     }
     fetchSlots()
-  }, [userDbId])
+  }, [userDbId , slots])
 
   return (
     <div>
       { slots.length > 0 ? (
         slots.map((slot)=><SlotCard startTime={slot?.startTime} endTime={slot?.endTime} date={slot?.date} slotId={slot?._id} />)
       ):(
-        <h1 className='text-xl font-bold text-white'>No Slots</h1>
+        <h1 className='text-lg font-bold  text-gray-500'>No Slots</h1>
       )}
     </div>
   )

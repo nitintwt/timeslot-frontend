@@ -16,7 +16,7 @@ function PastBookings() {
       }
     }
     fetchPastSlots()
-  } , [userDbId])
+  } , [userDbId , slots])
   
   return (
     <div className="grid gap-4">

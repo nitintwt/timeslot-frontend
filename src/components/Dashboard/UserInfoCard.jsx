@@ -37,7 +37,7 @@ function UserInfoCard() {
       } catch (error) {
         console.log("Something went wrong while fetching user details" , error)
         query.delete('code');
-        history.replace({ search: query.toString() });
+        
       }
     }
     fetchUserDetails()
@@ -86,15 +86,11 @@ function UserInfoCard() {
               <ChromeIcon className="h-5 w-5" />
               <div>Google</div>
             </div>
-            { tokensExist ? (
-              <Link variant="outline" size="sm" >
-                connected
-              </Link>
-            ): (
+
               <Link variant="outline" size="sm" href='/api/v1/google/OAuth'>
               connect
             </Link>
-            )}
+            
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">

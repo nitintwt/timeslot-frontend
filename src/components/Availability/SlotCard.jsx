@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import axios from 'axios';
 import { Button } from '@nextui-org/react';
+import { MdDelete } from "react-icons/md";
 
 export default function SlotCard({startTime , endTime , date , slotId}) {
   const [deleted , setDeleted] = useState(false)
@@ -18,24 +19,22 @@ export default function SlotCard({startTime , endTime , date , slotId}) {
   }
 
   return (
-    <Card className="w-full max-w-md dark">
-      <CardBody className="flex items-center justify-between gap-4 p-4">
-        <div className="grid gap-1">
-          <div className="flex items-center gap-2 text-sm font-medium">
-            <ClockIcon className="h-4 w-4 text-muted-foreground" />
-            <span>{startTime} - {endTime}</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+    <Card className='dark m-5'>
+      <CardBody >
+       <div>
+          <div className="p-4 rounded-md">
+            <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <CalendarIcon className="h-4 w-4" />
             <span>{date}</span>
           </div>
+              <div className="font-bold">{startTime} - {endTime}</div>
+              <button onClick={deleteSlot}>
+               <MdDelete size={21} color='red' />
+              </button>
+            </div>
+          </div>
         </div>
-        {deleted ? (''):(
-          <Button variant="ghost" size="sm" className="rounded-full p-2 hover:bg-muted" onClick={deleteSlot}>
-            <TrashIcon className="h-5 w-5" />
-            <span className="sr-only">Delete</span>
-          </Button>
-        )}
       </CardBody>
     </Card>
   )

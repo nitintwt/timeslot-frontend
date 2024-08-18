@@ -14,7 +14,7 @@ function Home() {
   // and if not then it register him
   useEffect(()=>{
     const databaseCallMade = sessionStorage.getItem('databaseCallMade');
-    if (user && !databaseCallMade){
+    if (user && !databaseCallMade) {
       const userRegisterInDb = async()=>{
         try {
           const saveUserInDb = await axios.post("/api/v1/users/register" , {
