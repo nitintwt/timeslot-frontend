@@ -9,7 +9,7 @@ function AvailableSlots() {
   useEffect(()=>{
     const fetchSlots = async ()=>{
       try {
-        const fetch = await axios.get(`/api/v1/slot/availableSlots?userDbId=${userDbId}`)
+        const fetch = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/availableSlots?userDbId=${userDbId}`)
         console.log(fetch.data.data)
         setSlots(fetch?.data?.data)
       } catch (error) {
@@ -17,7 +17,7 @@ function AvailableSlots() {
       }
     }
     fetchSlots()
-  }, [userDbId , slots])
+  }, [userDbId])
 
   return (
     <div>

@@ -9,7 +9,7 @@ function PastBookings() {
   useEffect(()=>{
     const fetchPastSlots = async ()=>{
       try {
-        const data = await axios.get(`/api/v1/slot/pastSlots?userDbId=${userDbId}`)
+        const data = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/pastSlots?userDbId=${userDbId}`)
         setSlots(data?.data?.data)
       } catch (error) {
         console.log("Something went wrong while fetching upcoming slots" , error)

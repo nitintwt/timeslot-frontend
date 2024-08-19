@@ -17,7 +17,7 @@ function Home() {
     if (user && !databaseCallMade) {
       const userRegisterInDb = async()=>{
         try {
-          const saveUserInDb = await axios.post("/api/v1/users/register" , {
+          const saveUserInDb = await axios.post(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/register` , {
           email: user?.emailAddresses?.[0]?.emailAddress,
           fullName : user?.fullName
           })
