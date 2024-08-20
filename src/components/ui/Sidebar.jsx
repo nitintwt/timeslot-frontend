@@ -100,20 +100,7 @@ export default function Sidebar() {
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="ml-auto ">
-          <SignedOut>
-            <Button color="primary" variant="ghost" size="lg">
-              <SignInButton mode='modal' />
-            </Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-          </div>
         </header>
-        <main className="flex-1  bg-black ">
-          <Outlet />
-        </main>
       </div>
     </div>
   );

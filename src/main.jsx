@@ -18,78 +18,86 @@ import Slots from './pages/Slots'
 import store from './store/store'
 import BookSlot from './pages/BookSlot'
 import AuthLayout from './components/ui/AuthLayout'
+import LandingLayout from './LandingLayout'
 
 
 const router = createBrowserRouter([
   {
     path: '',
-    element: <Layout/>,
+    element: <LandingLayout/>,
     children: [
       {
         path:'',
-        element: <Home/>
+        element:<Home/>
       },
-      {
-        path:'/dashboard',
-        element: (
-          <AuthLayout>
-            <Dashboard/>
-          </AuthLayout>
-        )
-      },
-      {
-        path:'/bookings',
-        element: (
-          <AuthLayout>
-            <Bookings/>
-          </AuthLayout>
-        )
-      },
-      {
-        path:'/availability',
-        element: (
-          <AuthLayout>
-            <Availability/>
-          </AuthLayout>
-        )
-      },
-      {
-        path:'/billing',
-        element: (
-          <AuthLayout>
-            <Billing/>
-          </AuthLayout>
-        )
-      },
-      {
-        path:'/settings',
-        element: (
-          <AuthLayout>
-            <Settings/>
-          </AuthLayout>
-        )
-      },
-      {
-        path:'/customers',
-        element: (
-          <AuthLayout>
-            <Customers/>
-          </AuthLayout>
-        )
-      },
-      {
-        path: '/slots',
-        element: 
-        <AuthLayout>
-          <Slots/>
-        </AuthLayout>
-      },
-      {
-        path: '/:username',
-        element: <BookSlot/>
-      }
-    ]}
-  
+    ]},
+    {
+      path:"/",
+      element:<Layout/>,
+      children:[
+        {
+          path:'/dashboard',
+          element: (
+              <AuthLayout>
+                <Dashboard/>
+              </AuthLayout>
+          )
+        },
+        {
+          path:'/bookings',
+          element: (
+              <AuthLayout>
+                <Bookings/>
+              </AuthLayout>
+          )
+        },
+        {
+          path:'/availability',
+          element: (
+              <AuthLayout>
+                <Availability/>
+              </AuthLayout>
+          )
+        },
+        {
+          path:'/billing',
+          element: (
+              <AuthLayout>
+                <Billing/>
+              </AuthLayout>
+          )
+        },
+        {
+          path:'/settings',
+          element: (
+              <AuthLayout>
+                <Settings/>
+              </AuthLayout>
+          )
+        },
+        {
+          path:'/customers',
+          element: (
+              <AuthLayout>
+                <Customers/>
+              </AuthLayout>
+          )
+        },
+        {
+          path: '/slots',
+          element: 
+            <AuthLayout>
+              <Slots/>
+            </AuthLayout>
+        },
+        /*
+        {
+          path: '/:username',
+          element: <BookSlot/>
+        }
+        */
+      ]
+    }
 ])
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
