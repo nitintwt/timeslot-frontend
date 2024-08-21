@@ -19,6 +19,7 @@ import store from './store/store'
 import BookSlot from './pages/BookSlot'
 import AuthLayout from './components/ui/AuthLayout'
 import LandingLayout from './LandingLayout'
+import Landing from './pages/Landing'
 
 
 const router = createBrowserRouter([
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
     children: [
       {
         path:'',
-        element:<Home/>
+        element:<Landing/>
       },
     ]},
     {
@@ -90,12 +91,11 @@ const router = createBrowserRouter([
               <Slots/>
             </AuthLayout>
         },
-        /*
         {
           path: '/:username',
           element: <BookSlot/>
         }
-        */
+        
       ]
     }
 ])

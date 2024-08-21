@@ -14,7 +14,7 @@ import { IoIosCreate } from "react-icons/io";
 export default function Sidebar() {
   // bg-muted , text-primary 
   return (
-    <div className="grid min-h-screen  w-full md:grid-cols-[180px_1fr] lg:grid-cols-[180px_1fr] font-roboto" >
+    <div className="grid  w-full md:grid-cols-[180px_1fr] lg:grid-cols-[180px_1fr] font-roboto" >
       <div className="hidden md:block" style={{background:'#0a0a0a'}}>
         <div className="flex dark h-full  max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center  px-4 lg:h-[60px] lg:px-6">

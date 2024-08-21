@@ -12,8 +12,8 @@ export default function MainLayout() {
     {/* Main Content Area */}
     <div className="flex flex-col">
       {/* Navbar */}
-      <header className="flex h-14 items-center gap-4 px-4 lg:h-[60px] lg:px-6" style={{ background: '#0a0a0a' }}>
-        <div className="ml-auto">
+      <header className="flex h-1 items-center gap-4 px-4 lg:h-[60px] lg:px-6" style={{ background: '#0a0a0a' }}>
+        <div className="ml-auto pb-10 lg:pb-1">
           <SignedOut>
             <Button color="primary" variant="ghost" size="lg">
               <SignInButton mode="modal" />

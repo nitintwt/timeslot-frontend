@@ -1,28 +1,28 @@
+import { Link, NavLink} from "react-router-dom";
 
-
-
-export default function Component() {
+export default function Landing() {
   return (
-    <div className="flex flex-col min-h-[100dvh]">
-      <header className="px-4 lg:px-6 h-14 flex items-center">
-        <Link href="#" className="flex items-center justify-center" prefetch={false}>
-          <CalendarIcon className="h-6 w-6" />
-          <span className="sr-only">Timeslot</span>
-        </Link>
+    <div className="flex flex-col min-h-[100dvh] text-white ">
+      <header className="px-4 lg:px-6 h-14 flex items-center ">
+          <div className="flex h-14 items-center  px-4 lg:h-[60px] lg:px-6">
+            <NavLink to="/" className="flex items-center gap-2 text-2xl font-semibold">
+              <span className="text-white font-bold">TimeSlot</span>
+            </NavLink>
+          </div>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link to="#features" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Features
           </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link to="#pricing" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Pricing
           </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link to="#contact" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Contact
           </Link>
         </nav>
       </header>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-3">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4">
@@ -35,16 +35,16 @@ export default function Component() {
                     optimize your time.
                   </p>
                 </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <div className="flex flex-col gap-2 sm:flex-row">
                   <Link
-                    href="#"
+                    to="#"
                     className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
                     Sign Up
                   </Link>
                   <Link
-                    href="#"
+                    to="#"
                     className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
@@ -54,10 +54,8 @@ export default function Component() {
               </div>
               <img
                 src="/placeholder.svg"
-                width="550"
-                height="550"
                 alt="Hero"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square"
+                className="mx-auto w-full h-auto overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square"
               />
             </div>
           </div>
@@ -110,10 +108,8 @@ export default function Component() {
               </div>
               <img
                 src="/placeholder.svg"
-                width="550"
-                height="310"
                 alt="Image"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
+                className="mx-auto w-full h-auto overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
               />
             </div>
           </div>
@@ -127,16 +123,16 @@ export default function Component() {
                 enterprises.
               </p>
             </div>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
+            <div className="flex flex-col gap-2 sm:flex-row lg:justify-end">
               <Link
-                href="#"
+                to="#"
                 className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >
                 View Pricing
               </Link>
               <Link
-                href="#"
+                to="#"
                 className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >
@@ -154,7 +150,7 @@ export default function Component() {
                   Ready to Streamline Your Scheduling?
                 </h2>
                 <Link
-                  href="#"
+                  to="#"
                   className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
@@ -162,35 +158,34 @@ export default function Component() {
                 </Link>
               </div>
               <div className="flex flex-col items-start space-y-4">
-                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Schedule a Demo</div>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed">
-                  Book a personalized demo to see how Timeslot can transform your scheduling process.
-                </p>
-                <Link
-                  href="#"
-                  className="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                  prefetch={false}
-                >
-                  Schedule Demo
-                </Link>
+                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Connect with Us</div>
+                <ul className="flex items-center space-x-4">
+                  <li>
+                    <Link to="#" className="text-muted-foreground hover:text-foreground">
+                      <span className="sr-only">Twitter</span>
+                      
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="text-muted-foreground hover:text-foreground">
+                      <span className="sr-only">GitHub</span>
+                      
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="text-muted-foreground hover:text-foreground">
+                      <span className="sr-only">LinkedIn</span>
+                      
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-muted-foreground">&copy; 2024 Timeslot. All rights reserved.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link href="#" className="text-xs hover:underline underline-offset-4" prefetch={false}>
-            Terms of Service
-          </Link>
-          <Link href="#" className="text-xs hover:underline underline-offset-4" prefetch={false}>
-            Privacy
-          </Link>
-        </nav>
-      </footer>
     </div>
-  )
+  );
 }
 
 function CalendarIcon(props) {
