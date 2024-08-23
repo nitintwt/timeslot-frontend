@@ -78,7 +78,7 @@ export default function SelectTimeSlot() {
         clientEmail: email,
         clientName:name,
         slotId: selectedTimeSlot._id,
-        meetLink: setCalenderEvent.data.data
+        meetLink: setCalenderEvent.data.hangoutLink
       })
       setBooked(true)
       console.log("mail sent successfully" , sendMail)

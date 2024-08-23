@@ -10,11 +10,11 @@ export default function Landing() {
   const navigate = useNavigate()
   
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     if(cookies[0]?.__clerk_db_jwt){
       navigate('/dashboard')
     }
-  },[cookies])
+  },[cookies])*/
   
   return (
     <div className="flex flex-col min-h-[100dvh] text-white font-roboto">
