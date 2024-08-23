@@ -1,15 +1,16 @@
 
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Toaster, toast } from 'sonner';
+import { useCookies } from "react-cookie";
 
 function AuthLayout({children}) {
   const navigate = useNavigate()
   const [loader , setLoader]= useState(true)
+  const cookies = useCookies()
   const userDbId = sessionStorage.getItem('userDbId')
 
   useEffect(()=>{
-    if (!userDbId){
+    if (!cookies[0]?.__clerk_db_jwt){
       navigate("/")
     }
     setLoader(false)

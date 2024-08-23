@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { Fragment, useCallback, useEffect } from 'react'
 import { Toaster, toast } from 'sonner';
 import { Link } from "react-router-dom"
-import LandingNavbar from '@/components/Landing/LandingNavbar';
+
 import HeroSection from '@/components/Landing/HeroSection';
 
 function Home() {
@@ -41,7 +41,7 @@ function Home() {
   //console.log(user?.emailAddresses?.[0]?.emailAddress)
   return (
     <div className="flex flex-col min-h-[100dvh] ">
-      <LandingNavbar/>
+
       <main className="flex-1">
          
         <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-muted">
