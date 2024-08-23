@@ -17,24 +17,13 @@ export default function Landing() {
   },[cookies])*/
   
   return (
-    <div className="flex flex-col min-h-[100dvh] text-white ">
+    <div className="flex flex-col min-h-[100dvh] text-white font-roboto">
       <header className="px-4 lg:px-6 h-14 flex items-center ">
           <div className="flex h-14 items-center  px-4 lg:h-[60px] lg:px-6">
-            <NavLink to="/" className="flex items-center gap-2 text-2xl font-semibold">
+            <NavLink to="/" className="flex items-center gap-2 text-3xl font-semibold">
               <span className="text-white font-bold">TimeSlot</span>
             </NavLink>
           </div>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link to="#features" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Features
-          </Link>
-          <Link to="#pricing" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Pricing
-          </Link>
-          <Link to="#contact" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Contact
-          </Link>
-        </nav>
       </header>
       <main className="flex-1">
         <HeroSection/>

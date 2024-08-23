@@ -10,34 +10,36 @@ function Pricing() {
           <div className="space-y-2">
             <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Pricing</div>
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Affordable Pricing for Businesses of All Sizes
+            Flexible Pricing for Freelancers and Independent Professionals
             </h2>
             <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Timeslot offers flexible pricing plans to fit your business's needs, from small startups to large
-              enterprises.
+              Timeslot offers affordable plans designed to fit the needs of freelancers, from those just starting out to seasoned professionals.
             </p>
           </div>
           <div className="flex flex-col gap-4">
             <Card className="p-6 grid gap-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-2xl font-bold">Starter</h3>
-                  <p className="text-muted-foreground">For small businesses</p>
+                  <h3 className="text-2xl font-bold">Free Plan</h3>
                 </div>
-                <div className="text-4xl font-bold">$9</div>
+                <div className="text-4xl font-bold">$0</div>
               </div>
               <div className="grid gap-2 text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <CheckIcon className="h-4 w-4" />
-                  <span>Up to 5 users</span>
+                  <span>Manage your time with core scheduling tools.</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckIcon className="h-4 w-4" />
-                  <span>Unlimited appointments</span>
+                  <span>A cap on the number of bookings you can make.</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckIcon className="h-4 w-4" />
-                  <span>Basic reporting</span>
+                  <span>User Dashboard</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4" />
+                  <span>Perfect for freelancers just starting out.</span>
                 </div>
               </div>
               <Button className="mt-4">Start Free Trial</Button>
@@ -46,18 +48,17 @@ function Pricing() {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-2xl font-bold">Pro</h3>
-                  <p className="text-muted-foreground">For growing businesses</p>
                 </div>
-                <div className="text-4xl font-bold">$29</div>
+                <div className="text-4xl font-bold">$9</div>
               </div>
               <div className="grid gap-2 text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <CheckIcon className="h-4 w-4" />
-                  <span>Up to 20 users</span>
+                  <span>Unlimited bookings</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckIcon className="h-4 w-4" />
-                  <span>Unlimited appointments</span>
+                  <span>Get faster responses and priority assistance.</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckIcon className="h-4 w-4" />
@@ -65,10 +66,10 @@ function Pricing() {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckIcon className="h-4 w-4" />
-                  <span>Team collaboration</span>
+                  <span>Access to premium tools for enhanced productivity.</span>
                 </div>
               </div>
-              <Button className="mt-4">Start Free Trial</Button>
+              <Button className="mt-4">Start</Button>
             </Card>
           </div>
         </div>
