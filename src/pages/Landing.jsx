@@ -10,18 +10,18 @@ export default function Landing() {
   const navigate = useNavigate()
   
 
-  /*useEffect(()=>{
+  useEffect(()=>{
     if(cookies[0]?.__clerk_db_jwt){
       navigate('/dashboard')
     }
-  },[cookies])*/
+  },[cookies])
   
   return (
     <div className="flex flex-col min-h-[100dvh] text-white font-roboto">
       <header className="px-4 lg:px-6 h-14 flex items-center ">
           <div className="flex h-14 items-center  px-4 lg:h-[60px] lg:px-6">
             <NavLink to="/" className="flex items-center gap-2 text-3xl font-semibold">
-              <span className="text-white font-bold">TimeSlot</span>
+              <span className="text-white font-bold pt-5">TimeSlot</span>
             </NavLink>
           </div>
       </header>
