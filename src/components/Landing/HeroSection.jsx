@@ -18,8 +18,8 @@ function HeroSection() {
               </p>
             </div>
             <div className="flex flex-col gap-2 sm:flex-row">
-              <Button color="primary" size="lg">
-                <SignInButton mode="modal" />
+              <Button color='primary'>
+              <Link to="/signup">Sign up</Link>
               </Button>
             </div>
           </div>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link} from "@nextui-org/react";
 import axios from "axios";
+import { useCookies } from 'react-cookie';
 
 export default function UsernameInput() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [userName , setUserName]= useState(null)
-  const userDbId = sessionStorage.getItem('userDbId')
+  const [cookies]= useCookies()
+  const userDbId = cookies?.userData?._id
 
 
   const handleSubmit= async ()=>{

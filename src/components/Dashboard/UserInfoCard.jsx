@@ -2,19 +2,19 @@ import React, { useEffect , useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import {Input} from "@nextui-org/input";
 import {Button, ButtonGroup} from "@nextui-org/button";
-import { useUser } from '@clerk/clerk-react';
 import axios from 'axios';
 import {Link} from "@nextui-org/react";
 import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
-import { Cookie } from 'lucide-react';
+import { useCookies } from 'react-cookie';
+import {User} from "@nextui-org/react";
 
 function UserInfoCard() {
-  const {user}= useUser()
   const [userName , setUserName]= useState('')
-  const userDbId = sessionStorage.getItem('userDbId')
   const [userNameExist , setUserNameExist]= useState(false)
   const [tokensExist , setTokenExist]= useState(false)
   const location = useLocation();
+  const [cookies]= useCookies()
+  const userDbId = cookies?.userData?._id
 
 
   useEffect(()=>{
@@ -56,11 +56,10 @@ function UserInfoCard() {
   return (
   <div className="flex text-white ml-1 w-full  max-w-[400px] flex-col gap-6 border- bg-background p-6 sm:p-8 md:p-10 md:border-l-0 md:border-t">
     <div className="flex items-center gap-4">
-      <Avatar src={user?.imageUrl}/>
-      <div className="grid gap-1">
-        <div className="font-medium">{user?.fullName}</div>
-        <div className="text-sm text-muted-foreground">{user?.emailAddresses?.[0]?.emailAddress}</div>
-      </div>
+    <User   
+      name={cookies?.userData?.name}
+      description={cookies?.userData?.email}
+    />
     </div>
     <div className="grid gap-4">
       { userNameExist ? (

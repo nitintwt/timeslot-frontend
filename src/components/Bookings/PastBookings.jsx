@@ -1,10 +1,12 @@
 import React , {useState , useEffect} from 'react'
 import BookingSlotCard from './BookingSlotCard'
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 function PastBookings() {
   const [slots , setSlots]= useState([])
-  const userDbId = sessionStorage.getItem('userDbId')
+  const [cookies]= useCookies()
+  const userDbId = cookies?.userData?._id
 
   useEffect(()=>{
     const fetchPastSlots = async ()=>{

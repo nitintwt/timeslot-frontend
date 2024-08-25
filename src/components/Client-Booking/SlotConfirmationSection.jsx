@@ -19,7 +19,6 @@ export default function SelectTimeSlot() {
   const [reason , setReason]= useState(null)
   const [booking , setBooking]= useState(false)
   const [booked , setBooked]= useState(false)
-  const {user}= useUser()
   const {username}= useParams()
 
   console.log(username)

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 function DashboardEarningsCard() {
   const [userEarnings , setUserEarnings]= useState(0)
-  const userDbId = sessionStorage.getItem('userDbId')
+  const [cookies]= useCookies()
+  const userDbId = cookies?.userData?._id
 
   useEffect(()=>{
     const fetchEarnings = async ()=>{

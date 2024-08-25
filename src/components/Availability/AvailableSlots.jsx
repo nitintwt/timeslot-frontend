@@ -1,10 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import SlotCard from './SlotCard'
+import { useCookies } from 'react-cookie';
 
 function AvailableSlots() {
   const [slots , setSlots]= useState([])
-  const userDbId = sessionStorage.getItem('userDbId')
+  const [cookies]= useCookies()
+  const userDbId = cookies?.userData?._id
+ 
 
   useEffect(()=>{
     const fetchSlots = async ()=>{

@@ -2,10 +2,12 @@ import React , {useState , useEffect} from 'react'
 import axios from 'axios';
 import BookingSlotCard from './BookingSlotCard'
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
+import { useCookies } from 'react-cookie';
 
 function CancelledBookings() {
   const [slots , setSlots]= useState([])
-  const userDbId = sessionStorage.getItem('userDbId')
+  const [cookies]= useCookies()
+  const userDbId = cookies?.userData?._id
 
   useEffect(()=>{
     const fetchPastSlots = async ()=>{

@@ -2,11 +2,13 @@ import React, { useEffect, useState, useSyncExternalStore } from 'react'
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import axios from 'axios';
 import {ScrollShadow} from "@nextui-org/react";
+import { useCookies } from 'react-cookie';
 
 export default function Component() {
-  const userDbId = sessionStorage.getItem('userDbId')
   const [customers , setCustomers]= useState([])
   const [isloading , setIsloading]= useState(true)
+  const [cookies]= useCookies()
+  const userDbId = cookies?.userData?._id
 
   useEffect (()=>{
     const fetchAllCustomersData = async ()=>{

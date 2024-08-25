@@ -10,7 +10,7 @@ function AuthLayout({children}) {
   const userDbId = sessionStorage.getItem('userDbId')
 
   useEffect(()=>{
-    if (!cookies[0]?.__clerk_db_jwt){
+    if (!cookies?.[0]?.userData?._id){
       navigate("/")
     }
     setLoader(false)

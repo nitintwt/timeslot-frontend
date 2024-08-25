@@ -9,12 +9,11 @@ export default function Landing() {
   const cookies = useCookies()
   const navigate = useNavigate()
   
-
   useEffect(()=>{
-    if(cookies[0]?.__clerk_db_jwt){
+    if(cookies?.[0]?.userData?._id){
       navigate('/dashboard')
     }
-  },[cookies])
+  },[])
   
   return (
     <div className="flex flex-col min-h-[100dvh] text-white font-roboto">

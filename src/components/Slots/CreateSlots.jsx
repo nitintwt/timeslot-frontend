@@ -9,6 +9,7 @@ import { Select, SelectItem } from '@nextui-org/react';
 import axios from 'axios';
 import { Toaster, toast } from 'sonner';
 import {today, getLocalTimeZone} from "@internationalized/date";
+import { useCookies } from 'react-cookie';
 
 function CreateSlots() {
   const [startTime , setStartTime]= useState('')
@@ -19,7 +20,8 @@ function CreateSlots() {
   
   const dispatch = useDispatch()
   const slots = useSelector((state)=> state?.slots?.slots)
-  const userDbId = sessionStorage.getItem('userDbId')
+  const [cookies]= useCookies()
+  const userDbId = cookies?.userData?._id
 
   // the date format from the calender component is unreadble by human , so updated the date to make it readable
   const formatDate = (selectedDate)=>{

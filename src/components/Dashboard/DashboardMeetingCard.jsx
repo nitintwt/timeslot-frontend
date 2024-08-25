@@ -1,10 +1,12 @@
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import axios from "axios";
 import React, { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie';
 
 function DashboardMeetingCard() {
   const [numberOfMeetings , setNumberOfMeetings]= useState(0)
-  const userDbId = sessionStorage.getItem('userDbId')
+  const [cookies]= useCookies()
+  const userDbId = cookies?.userData?._id
 
   useEffect(()=>{
     const fetchMeetingsData = async ()=>{

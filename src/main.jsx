@@ -1,13 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { dark } from '@clerk/themes'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './Layout.jsx'
 import {NextUIProvider} from '@nextui-org/react'
-import Home from './pages/Home.jsx'
 import Dashboard from './pages/Dashboard.jsx'
-import { ClerkProvider } from '@clerk/clerk-react'
 import { Provider} from 'react-redux'
 import Bookings from './pages/Bookings'
 import Availability from './pages/Availability'
@@ -20,6 +17,8 @@ import BookSlot from './pages/BookSlot'
 import AuthLayout from './components/ui/AuthLayout'
 import LandingLayout from './LandingLayout'
 import Landing from './pages/Landing'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
 
 
 const router = createBrowserRouter([
@@ -31,6 +30,14 @@ const router = createBrowserRouter([
         path:'',
         element:<Landing/>
       },
+      {
+        path:"/signup",
+        element:<Signup/>
+      },
+      {
+        path:"/login",
+        element:<Login/>
+      }
     ]},
     {
       path:"/",
@@ -100,18 +107,12 @@ const router = createBrowserRouter([
     }
 ])
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ClerkProvider  
-    appearance={{baseTheme: dark}}  
-    publishableKey={PUBLISHABLE_KEY}>
     <Provider store={store}>
      <NextUIProvider>
        <RouterProvider router={router}/>
       </NextUIProvider>
     </Provider>  
-   </ClerkProvider>
   </React.StrictMode>
 )
