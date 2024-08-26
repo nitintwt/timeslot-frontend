@@ -21,9 +21,6 @@ export default function SelectTimeSlot() {
   const [booked , setBooked]= useState(false)
   const {username}= useParams()
 
-  console.log(username)
-
-
   const formatDate = (selectedDate)=>{
     const day = selectedDate?.day.toString().padStart(2, '0');
     const month = selectedDate?.month.toString().padStart(2, '0');

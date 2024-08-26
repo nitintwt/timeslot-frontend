@@ -37,6 +37,10 @@ const router = createBrowserRouter([
       {
         path:"/login",
         element:<Login/>
+      },
+      {
+        path: '/:username',
+        element: <BookSlot/>
       }
     ]},
     {
@@ -97,12 +101,7 @@ const router = createBrowserRouter([
             <AuthLayout>
               <Slots/>
             </AuthLayout>
-        },
-        {
-          path: '/:username',
-          element: <BookSlot/>
         }
-        
       ]
     }
 ])
