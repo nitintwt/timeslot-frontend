@@ -8,7 +8,6 @@ function AvailableSlots() {
   const [cookies]= useCookies()
   const userDbId = cookies?.userData?._id
  
-
   useEffect(()=>{
     const fetchSlots = async ()=>{
       try {

@@ -31,7 +31,6 @@ function CreateSlots() {
 
     return `${year}-${month}-${day}`
   }
-  console.log('date', formatDate(date))
   // delete whole slots in the redux store , when user selects a different date
   useEffect(()=>{
     dispatch(deleteAllSlots())
@@ -43,7 +42,7 @@ function CreateSlots() {
         const userDetails = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/getUserDetails` , {params: {userDbId: userDbId}})
         console.log(userDetails?.data?.data?.userName)
         if (paid=='true' &&  userDetails?.data?.data?.stripeAccountId== null) {
-          toast.warning("Please link your Stripe account first. Go to Billing Page.")
+          toast.warning("Please link your Razorpay or lemonsqueezy account. Go to Dashboard Page.")
         }
       }
       fetchUserDetails()

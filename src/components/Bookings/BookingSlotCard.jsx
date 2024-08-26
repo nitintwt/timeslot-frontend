@@ -22,7 +22,7 @@ function BookingSlotCard({ slotId , slotStartTime , slotEndTime , date , type}) 
 
   const cancelBooking = async ()=>{
     try {
-      const cancelSlot = await axios.post(`${import.meta.env.VITE_AWS_USERS_API}api/v1/slot/cancelBooking`, {slotId: slotId , customerEmail:customer.customerEmail , customerName: customer.customerName})
+      const cancelSlot = await axios.post(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/cancelBooking`, {slotId: slotId , customerEmail:customer.customerEmail , customerName: customer.customerName})
       setCancelled(true)
     } catch (error) {
       console.log("Something went wrong while canceling the booking" , error)

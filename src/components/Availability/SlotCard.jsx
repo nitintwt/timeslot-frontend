@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , Fragment } from 'react'
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import axios from 'axios';
 import { Button } from '@nextui-org/react';
@@ -29,9 +29,19 @@ export default function SlotCard({startTime , endTime , date , slotId}) {
             <span>{date}</span>
           </div>
               <div className="font-bold">{startTime} - {endTime}</div>
-              <button onClick={deleteSlot}>
-               <MdDelete size={21} color='red' />
-              </button>
+              { deleted ? (
+              <Fragment>
+                <button >
+                  <MdDelete size={21} color='gray' />
+                </button>
+              </Fragment>
+              ):(
+              <Fragment>
+                <button onClick={deleteSlot}>
+                 <MdDelete size={21} color='red' />
+                </button>
+              </Fragment>
+              )}
             </div>
           </div>
         </div>

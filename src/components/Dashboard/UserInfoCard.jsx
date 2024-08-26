@@ -101,7 +101,7 @@ function UserInfoCard() {
               <div>Razorpay</div>
             </div>
             <Link variant="outline" size="sm">
-              disconnect
+              connect
             </Link>
           </div>
           <div className="flex items-center justify-between">
@@ -110,7 +110,7 @@ function UserInfoCard() {
               <div>LemonSqueezy</div>
             </div>
             <Link variant="outline" size="sm">
-              disconnect
+              connect
             </Link>
           </div>
         </div>
