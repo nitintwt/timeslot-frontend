@@ -1,8 +1,13 @@
 import React from 'react'
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import {Button, ButtonGroup} from "@nextui-org/button";
+import { toast, Toaster } from 'sonner'
+import { Link } from "react-router-dom";;
 
 function Pricing() {
+  const handleStart = ()=>{
+    toast.error("Under development. Just Signup for use")
+  }
   return (
     <section className="w-full py-12 md:py-24  bg-muted dark">
       <div className="container px-4 md:px-6">
@@ -42,7 +47,9 @@ function Pricing() {
                   <span>Perfect for freelancers just starting out.</span>
                 </div>
               </div>
-              <Button className="mt-4">Start Free Trial</Button>
+              <Button >
+                <Link to="/signup">Start free trial</Link>
+              </Button>
             </Card>
             <Card className="p-6 grid gap-4">
               <div className="flex items-center justify-between">
@@ -69,11 +76,12 @@ function Pricing() {
                   <span>Access to premium tools for enhanced productivity.</span>
                 </div>
               </div>
-              <Button className="mt-4">Start</Button>
+              <Button className="mt-4" onClick={handleStart}>Start</Button>
             </Card>
           </div>
         </div>
       </div>
+      <Toaster position='bottom-center' />
     </section>
   )
 }

@@ -19,7 +19,7 @@ function HeroSection() {
             </div>
             <div className="flex flex-col gap-2 sm:flex-row">
               <Button color='primary'>
-              <Link to="/signup">Sign up</Link>
+                <Link to="/signup">Sign up</Link>
               </Button>
             </div>
           </div>
