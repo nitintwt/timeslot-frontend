@@ -4,11 +4,10 @@ import { useCookies } from "react-cookie";
 import { Link, NavLink, useNavigate} from "react-router-dom";
 import Pricing from "../components/Landing/Pricing";
 
-
 export default function Landing() {
   const cookies = useCookies()
   const navigate = useNavigate()
-  
+
   useEffect(()=>{
     if(cookies?.[0]?.userData?._id){
       navigate('/dashboard')

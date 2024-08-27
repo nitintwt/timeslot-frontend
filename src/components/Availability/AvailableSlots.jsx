@@ -23,7 +23,7 @@ function AvailableSlots() {
   return (
     <div>
       { slots.length > 0 ? (
-        slots.map((slot)=><SlotCard startTime={slot?.startTime} endTime={slot?.endTime} date={slot?.date} slotId={slot?._id} />)
+        slots.map((slot)=><SlotCard key={slot?._id} startTime={slot?.startTime} endTime={slot?.endTime} date={slot?.date} slotId={slot?._id} />)
       ):(
         <h1 className='text-lg font-bold  text-gray-500'>No Slots</h1>
       )}

@@ -26,7 +26,7 @@ export default function LoginBox() {
       }, 1000)
     } catch (error) {
       console.log("Something went wrong while login" , error)
-      toast.error("Something went wrong while login. Try again")
+      toast.error(error?.response?.data?.data)
     }
   }
 

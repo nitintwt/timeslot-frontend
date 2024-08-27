@@ -5,9 +5,9 @@ export default function StripeConnect() {
     <div className="flex bg-black flex-col items-center justify-center h-screen text-neutral-300">
       <div className="max-w-md w-full space-y-6 px-4">
         <div className="text-center ml-9">
-          <h1 className="text-3xl font-bold text-white">Connect Your Stripe Account</h1>
+          <h1 className="text-3xl font-bold text-white">Connect Your Razorpay Account</h1>
           <p className="mt-2 text-muted-foreground">
-            Integrate your Stripe account to start accepting payments in your account.
+            Integrate your Razorpay account to start accepting payments in your account.
           </p>
         </div>
         <Link
@@ -16,7 +16,7 @@ export default function StripeConnect() {
           prefetch={false}
         >
           <SquareStackIcon className="mr-2 h-5 w-5" />
-          Connect with Stripe
+          Connect with Razorpay
         </Link>
       </div>
     </div>
