@@ -12,7 +12,7 @@ export default function UsernameInput() {
 
   const handleSubmit= async ()=>{
       try {
-        const submitUsername = await axios.post(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/setUsername`, {
+        const submitUsername = await axios.post(`/api/v1/users/setUsername`, {
           username: userName,
           userDbId:userDbId
         })

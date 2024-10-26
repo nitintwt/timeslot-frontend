@@ -11,7 +11,7 @@ function DashboardMeetingCard() {
   useEffect(()=>{
     const fetchMeetingsData = async ()=>{
       try {
-        const meetings = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/totalNumberOfMeetingsOfLast28Days?userDbId=${userDbId}`)
+        const meetings = await axios.get(`/api/v1/users/totalNumberOfMeetingsOfLast28Days?userDbId=${userDbId}`)
         setNumberOfMeetings(meetings?.data?.data)
         console.log(meetings)
       } catch (error) {

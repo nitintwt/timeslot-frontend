@@ -37,7 +37,7 @@ export default function SelectTimeSlot() {
     const formattedDate = formatDate(selectedDate);
     const fetchSlots = async ()=>{
       try {
-        const fetch = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/getSlots` , {
+        const fetch = await axios.get(`/api/v1/slot/getSlots` , {
           params:{date:formattedDate , userName:username,}
         })
         setSlots(fetch.data.data)
@@ -59,18 +59,18 @@ export default function SelectTimeSlot() {
     e.preventDefault()
     const formattedDate = formatDate(selectedDate);
     try {
-      const bookSlot = await axios.post(`${import.meta.env.VITE_AWS_CLIENT_API}/api/v1/customer/bookSlot` , {
+      const bookSlot = await axios.post(`/api/v1/customer/bookSlot` , {
         email: email,
         name: name,
         slotId : selectedTimeSlot._id, 
         reason: reason,
         slotCreator: username
       })
-      const setCalenderEvent = await axios.post(`${import.meta.env.VITE_AWS_GOOGLE_API}/api/v1/google/scheduleEvent` , {
+      const setCalenderEvent = await axios.post(`/api/v1/google/scheduleEvent` , {
         userName: username , client : name , clientEmail: email , date: formattedDate , timeSlot:selectedTimeSlot._id , meetReason: reason,
       })
       console.log("Calender event done" , setCalenderEvent.data.data)
-      const sendMail = await axios.post(`${import.meta.env.VITE_AWS_CLIENT_API}/api/v1/customer/sendmail`, {
+      const sendMail = await axios.post(`/api/v1/customer/sendmail`, {
         clientEmail: email,
         clientName:name,
         slotId: selectedTimeSlot._id,

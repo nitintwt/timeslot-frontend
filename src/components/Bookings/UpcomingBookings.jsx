@@ -12,7 +12,7 @@ function UpcomingBookings() {
   useEffect(()=>{
     const fetchUpcomingSlots = async ()=>{
       try {
-        const data = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/upcomingSlots?userDbId=${userDbId}`)
+        const data = await axios.get(`/api/v1/slot/upcomingSlots?userDbId=${userDbId}`)
         setSlots(data.data.data)
       } catch (error) {
         console.log("Something went wrong while fetching upcoming slots" , error)

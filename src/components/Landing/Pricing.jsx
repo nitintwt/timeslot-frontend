@@ -1,109 +1,86 @@
-import React from 'react'
-import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
+import { Check } from "lucide-react";
 import {Button, ButtonGroup} from "@nextui-org/button";
-import { toast, Toaster } from 'sonner'
-import { Link } from "react-router-dom";;
+import { Link, useNavigate } from "react-router-dom";
+import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 
-function Pricing() {
-  const handleStart = ()=>{
-    toast.error("Under development. Just Signup for use")
-  }
+export default function PricingPage() {
+  const navigate = useNavigate()
+  const plans = [
+    {
+      name: "Free",
+      price: "$0",
+      features: ["Personalized URL", "30 Bookings per Month", "Google Meet Integration", "Unlimited Email Notifications", "Customer Analytics"],
+    },
+    {
+      name: "Monthly",
+      price: "$9",
+      features: [
+        "Personalized URL",
+        "Unlimited Bookings",
+        "Google Calendar Integration",
+        "Unlimited Email Notifications",
+        "Customer Analytics",
+        "Customized Email Notifications",
+        "Email & Live Chat Support"
+      ],
+    },
+    {
+      name: "Yearly",
+      price: "$89",
+      features: [
+        "Personalized URL",
+        "Unlimited Bookings",
+        "Google Calendar Integration",
+        "Unlimited Email Notifications",
+        "Customer Analytics",
+        "Customized Email Notifications",
+        "Email & Live Chat Support"
+      ],
+    },
+  ];
+
   return (
-    <section className="w-full py-12 md:py-24  bg-muted dark">
-      <div className="container px-4 md:px-6">
-        <div className="grid items-center gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_550px]">
-          <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Pricing</div>
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-            Flexible Pricing for Freelancers and Independent Professionals
-            </h2>
-            <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Timeslot offers affordable plans designed to fit the needs of freelancers, from those just starting out to seasoned professionals.
-            </p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <Card className="p-6 grid gap-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold">Free Plan</h3>
-                </div>
-                <div className="text-4xl font-bold">$0</div>
-              </div>
-              <div className="grid gap-2 text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CheckIcon className="h-4 w-4" />
-                  <span>Manage your time with core scheduling tools.</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckIcon className="h-4 w-4" />
-                  <span>A cap on the number of bookings you can make.</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckIcon className="h-4 w-4" />
-                  <span>User Dashboard</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckIcon className="h-4 w-4" />
-                  <span>Perfect for freelancers just starting out.</span>
-                </div>
-              </div>
-              <Button >
-                <Link to="/signup">Start free trial</Link>
-              </Button>
+    <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8 ">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center">
+          <h2 className="text-3xl font-extrabold  sm:text-4xl">
+            Simple, transparent pricing
+          </h2>
+          <p className="mt-4 text-xl text-gray-600">
+            Choose the plan that's right for you
+          </p>
+        </div>
+        <div className="mt-16 grid gap-8 lg:grid-cols-3 lg:gap-x-8">
+          {plans.map((plan) => (
+            <Card
+              key={plan.name}
+              className="flex flex-col bg-gray-950 justify-between border-2 border-gray-200 text-white"
+            >
+              <CardHeader className="flex flex-col items-start text-center justify-start">
+                <h2 className="text-2xl font-bold">{plan.name}</h2>
+                <h3 className="text-4xl font-extrabold mt-2">{plan.price}</h3>
+              </CardHeader>
+              <CardBody >
+                <p className="text-gray-600 mb-4">{plan.description}</p>
+                <ul className="space-y-2">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-center">
+                      <Check className="h-5 w-5 text-green-900 mr-2" />
+                      <span className="text-gray-200">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardBody>
+              <CardFooter>
+                <Button className="w-full bg-gray-900 text-white hover:bg-gray-800 text-lg" onClick={()=> navigate("/signup")}>
+                  Start
+                </Button>
+              </CardFooter>
             </Card>
-            <Card className="p-6 grid gap-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold">Pro</h3>
-                </div>
-                <div className="text-4xl font-bold">$9</div>
-              </div>
-              <div className="grid gap-2 text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CheckIcon className="h-4 w-4" />
-                  <span>Unlimited bookings</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckIcon className="h-4 w-4" />
-                  <span>Get faster responses and priority assistance.</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckIcon className="h-4 w-4" />
-                  <span>Advanced reporting</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckIcon className="h-4 w-4" />
-                  <span>Access to premium tools for enhanced productivity.</span>
-                </div>
-              </div>
-              <Button className="mt-4" onClick={handleStart}>Start</Button>
-            </Card>
-          </div>
+          ))}
         </div>
       </div>
-      <Toaster position='bottom-center' />
-    </section>
-  )
-}
-
-export default Pricing
-
-function CheckIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
-  )
+    </div>
+  );
 }
 

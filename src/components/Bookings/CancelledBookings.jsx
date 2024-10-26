@@ -12,7 +12,7 @@ function CancelledBookings() {
   useEffect(()=>{
     const fetchPastSlots = async ()=>{
       try {
-        const data = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/cancelledSlots?userDbId=${userDbId}`)
+        const data = await axios.get(`/api/v1/slot/cancelledSlots?userDbId=${userDbId}`)
         setSlots(data?.data?.data)
       } catch (error) {
         console.log("Something went wrong while fetching cancelled slots" , error)

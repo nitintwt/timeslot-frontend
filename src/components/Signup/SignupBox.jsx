@@ -12,7 +12,7 @@ export default function SignupBox() {
 
   const handleSubmit = async ()=>{
     try {
-      const register = await axios.post(`${import.meta.env.VITE_AWS_AUTH_API}/api/v1/auth/register` , {
+      const register = await axios.post(`/api/v1/auth/register` , {
         name:name,
         email:email,
         password:password
@@ -24,7 +24,7 @@ export default function SignupBox() {
       }, 1000)
     } catch (error) {
       console.log("Something went wrong while registering user" , error)
-      toast.error("Something went wrong while registering user. Try again")
+      toast.error(error?.response?.data?.data)
     }
   }
 

@@ -39,7 +39,7 @@ function CreateSlots() {
     // fetch the user details from the db ,, and checks whether the user has linked his stripe account or not. And also fetch the username
     useEffect(()=>{
       const fetchUserDetails = async ()=>{
-        const userDetails = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/getUserDetails` , {params: {userDbId: userDbId}})
+        const userDetails = await axios.get(`/api/v1/users/getUserDetails` , {params: {userDbId: userDbId}})
         console.log(userDetails?.data?.data?.userName)
         if (paid=='true' &&  userDetails?.data?.data?.stripeAccountId== null) {
           toast.warning("Please link your Razorpay or lemonsqueezy account. Go to Dashboard Page.")
@@ -73,7 +73,7 @@ function CreateSlots() {
   // slots array which I get from the redux store is saved in db
   const handleCreateSlot = async ()=>{
     try {
-      const savedSlotsInDb = await axios.post(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/createSlot` , {slots})
+      const savedSlotsInDb = await axios.post(`/api/v1/slot/createSlot` , {slots})
       console.log(savedSlotsInDb)
       setStartTime('')
       setEndTime('')

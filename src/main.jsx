@@ -19,6 +19,8 @@ import LandingLayout from './LandingLayout'
 import Landing from './pages/Landing'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
+import Pricing from './components/Landing/Pricing'
+import PricingPage from './components/Pricing/PricingCards'
 
 
 const router = createBrowserRouter([
@@ -41,7 +43,7 @@ const router = createBrowserRouter([
       {
         path: '/:username',
         element: <BookSlot/>
-      }
+      },
     ]},
     {
       path:"/",
@@ -101,6 +103,13 @@ const router = createBrowserRouter([
             <AuthLayout>
               <Slots/>
             </AuthLayout>
+        },
+        {
+          path:"/pricing",
+          element:
+          <AuthLayout>
+            <PricingPage/>
+          </AuthLayout>
         }
       ]
     }

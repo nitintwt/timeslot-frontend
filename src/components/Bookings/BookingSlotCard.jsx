@@ -10,7 +10,7 @@ function BookingSlotCard({ slotId , slotStartTime , slotEndTime , date , type}) 
   useEffect (()=>{
     const fetchCustomerData = async ()=>{
       try {
-        const data = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/getCustomerData?slotId=${slotId}`)
+        const data = await axios.get(`/api/v1/users/getCustomerData?slotId=${slotId}`)
         console.log(data.data.data)
         setCustomer(data?.data?.data)
       } catch (error) {

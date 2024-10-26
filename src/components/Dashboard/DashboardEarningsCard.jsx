@@ -11,7 +11,7 @@ function DashboardEarningsCard() {
   useEffect(()=>{
     const fetchEarnings = async ()=>{
       try {
-        const userEarnings = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/totalRevenueOfLast28Days?userDbId=${userDbId}`)
+        const userEarnings = await axios.get(`/api/v1/users/totalRevenueOfLast28Days?userDbId=${userDbId}`)
         setUserEarnings(userEarnings.data.data)
       } catch (error) {
         console.log("Something went wrong while fetching user earnings" , error)
