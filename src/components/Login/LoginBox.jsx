@@ -18,9 +18,10 @@ export default function LoginBox() {
         email:email,
         password:password
       })
-      console.log(login)
-      setCookies("userData",{_id:login?.data?.data?.user?._id , email:login?.data?.data?.user?.email , name:login?.data?.data?.user?.fullName})
+      console.log("login data",login)
+      setCookies("userData",{_id:login?.data?.data?.user?._id , email:login?.data?.data?.user?.email , name:login?.data?.data?.user?.fullName , paidUser: login?.data?.data?.user?.paidUser})
       toast.success("Login successfull")
+      console.log("cookies data" , cookies)
       setTimeout(()=>{
         navigate("/dashboard")
       }, 1000)

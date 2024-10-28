@@ -9,6 +9,7 @@ import SlotCard from "./SlotCard";
 import { Link, useParams } from "react-router-dom";
 import {Textarea} from "@nextui-org/react";
 import { Toaster, toast } from 'sonner';
+import { CalendarDays, Clock, Mail, X } from "lucide-react"
 
 export default function SelectTimeSlot() {
   const [selectedDate, setSelectedDate] = useState(today(getLocalTimeZone()))
@@ -20,6 +21,7 @@ export default function SelectTimeSlot() {
   const [booking , setBooking]= useState(false)
   const [booked , setBooked]= useState(false)
   const {username}= useParams()
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const formatDate = (selectedDate)=>{
     const day = selectedDate?.day.toString().padStart(2, '0');
@@ -124,7 +126,7 @@ export default function SelectTimeSlot() {
                   </button>
                 ))}
               </div>
-            )  : (<div className="font-md text-white"> No Slots available </div>)}
+            )  : (<div className="font-md text-white flex justify-center lg:justify-normal"> No Slots available </div>)}
             {selectedTimeSlot && (
               <form onSubmit={handleSubmit} className="mt-8 space-y-4 text-white ">
                 <div>
@@ -151,9 +153,48 @@ export default function SelectTimeSlot() {
                   Book Slot
                 </Button>
                 )}
+                <p className="text-sm text-muted-foreground mt-2">
+                  You will receive an email with the Google Meet link and a Google Calendar invite.
+                </p>
               </form>
             )}
           </div>
+          <Button variant="link" className="mt-6 text-white" onClick={() => setIsDialogOpen(true)}>
+            <Mail className="mr-2 h-4 w-4" />
+            Can't find a suitable time? Contact us
+          </Button>
+          {isDialogOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 text-white">
+              <div className="bg-background rounded-lg shadow-lg max-w-md w-full">
+                <div className="p-6">
+                  <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg font-semibold">Contact Us</h2>
+                    <Button variant="ghost" size="icon" onClick={() => setIsDialogOpen(false)}>
+                    <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Send a message about your availability and we'll get back to you.
+                  </p>
+                  <form  className="space-y-4">
+                    <div className="space-y-2">
+                      <h3 htmlFor="contact-name">Name</h3>
+                      <Input id="contact-name" variant="bordered" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 htmlFor="contact-email">Email</h3>
+                      <Input id="contact-email" type="email" variant="bordered" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 htmlFor="contact-message">Message</h3>
+                      <Textarea id="contact-message" variant="bordered"/>
+                    </div>
+                    <Button type="submit" className="w-full" color="primary">Send message</Button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
         <Toaster position="bottom-center" />
       </div>

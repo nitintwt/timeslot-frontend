@@ -80,7 +80,7 @@ export default function PricingPage() {
         console.log("Order created", order.data.data);
   
         const paymentObject = new window.Razorpay({
-          key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Updated to use VITE_ prefix
+          key: import.meta.env.VITE_RAZORPAY_KEY_ID,
           order_id: order.data.data.id,
           ...order.data.data,
           handler: async function (response) {
@@ -92,7 +92,7 @@ export default function PricingPage() {
                 userId: cookies?.userData?._id
               });
               console.log("Payment verified", verify);
-              setCookies("paidUser", true)
+              setCookies("userData", {...cookies.userData , paidUser:true})
               navigate("/dashboard")
             } catch (error) {
               console.log("Verification error", error);

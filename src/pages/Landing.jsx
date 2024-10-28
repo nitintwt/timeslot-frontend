@@ -6,8 +6,10 @@ import HeroSection from "../components/Landing/HeroSection"
 import Pricing from "../components/Landing/Pricing"
 
 export default function Landing() {
-  const [cookies] = useCookies(["userData"])
+  const [cookies] = useCookies()
   const navigate = useNavigate()
+
+  console.log("cookies data from landing page" , cookies)
 
   useEffect(() => {
     if (cookies?.userData?._id) {

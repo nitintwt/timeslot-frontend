@@ -58,7 +58,7 @@ export default function Sidebar() {
                 Customers
               </NavLink>
             </nav>
-            { cookies?.[0]?.paidUser ? (""): (
+            { cookies?.[0]?.userData?.paidUser ? (""): (
               <div className="p-4 bg-gray-950 rounded-lg shadow-lg text-center mb-4 mx-2">
                 <h3 className="text-lg font-bold text-white">Upgrade to Premium</h3>
                 <Button color="primary" size="sm" className="mt-3" onClick={()=> navigate("/pricing")}>Explore Plans</Button>

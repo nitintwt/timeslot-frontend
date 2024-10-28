@@ -10,6 +10,8 @@ export default function Component() {
   const [cookies]= useCookies()
   const userDbId = cookies?.userData?._id
 
+
+
   useEffect (()=>{
     const fetchAllCustomersData = async ()=>{
       try {
