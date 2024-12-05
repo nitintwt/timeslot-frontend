@@ -15,7 +15,7 @@ export default function Component() {
   useEffect (()=>{
     const fetchAllCustomersData = async ()=>{
       try {
-        const data = await axios.get(`/api/v1/users/getAllCustomersData?userDbId=${userDbId}`)
+        const data = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/getAllCustomersData?userDbId=${userDbId}`)
         console.log("cutomers",data.data.data)
         setCustomers(data.data.data)
         setIsloading(false)

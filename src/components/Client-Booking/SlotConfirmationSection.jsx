@@ -21,7 +21,6 @@ export default function SelectTimeSlot() {
   const [booking , setBooking]= useState(false)
   const [booked , setBooked]= useState(false)
   const {username}= useParams()
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const formatDate = (selectedDate)=>{
     const day = selectedDate?.day.toString().padStart(2, '0');
@@ -39,7 +38,7 @@ export default function SelectTimeSlot() {
     const formattedDate = formatDate(selectedDate);
     const fetchSlots = async ()=>{
       try {
-        const fetch = await axios.get(`/api/v1/slot/getSlots` , {
+        const fetch = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/getSlots` , {
           params:{date:formattedDate , userName:username,}
         })
         setSlots(fetch.data.data)
@@ -61,18 +60,18 @@ export default function SelectTimeSlot() {
     e.preventDefault()
     const formattedDate = formatDate(selectedDate);
     try {
-      const bookSlot = await axios.post(`/api/v1/customer/bookSlot` , {
+      const bookSlot = await axios.post(`${import.meta.env.VITE_AWS_CLIENT_API}/api/v1/customer/bookSlot` , {
         email: email,
         name: name,
         slotId : selectedTimeSlot._id, 
         reason: reason,
         slotCreator: username
       })
-      const setCalenderEvent = await axios.post(`/api/v1/google/scheduleEvent` , {
+      const setCalenderEvent = await axios.post(`${import.meta.env.VITE_AWS_GOOGLE_API}/api/v1/google/scheduleEvent` , {
         userName: username , client : name , clientEmail: email , date: formattedDate , timeSlot:selectedTimeSlot._id , meetReason: reason,
       })
       console.log("Calender event done" , setCalenderEvent.data.data)
-      const sendMail = await axios.post(`/api/v1/customer/sendmail`, {
+      const sendMail = await axios.post(`${import.meta.env.VITE_AWS_CLIENT_API}/api/v1/customer/sendmail`, {
         clientEmail: email,
         clientName:name,
         slotId: selectedTimeSlot._id,
@@ -159,42 +158,6 @@ export default function SelectTimeSlot() {
               </form>
             )}
           </div>
-          <Button variant="link" className="mt-6 text-white" onClick={() => setIsDialogOpen(true)}>
-            <Mail className="mr-2 h-4 w-4" />
-            Can't find a suitable time? Contact us
-          </Button>
-          {isDialogOpen && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 text-white">
-              <div className="bg-background rounded-lg shadow-lg max-w-md w-full">
-                <div className="p-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-lg font-semibold">Contact Us</h2>
-                    <Button variant="ghost" size="icon" onClick={() => setIsDialogOpen(false)}>
-                    <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Send a message about your availability and we'll get back to you.
-                  </p>
-                  <form  className="space-y-4">
-                    <div className="space-y-2">
-                      <h3 htmlFor="contact-name">Name</h3>
-                      <Input id="contact-name" variant="bordered" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 htmlFor="contact-email">Email</h3>
-                      <Input id="contact-email" type="email" variant="bordered" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 htmlFor="contact-message">Message</h3>
-                      <Textarea id="contact-message" variant="bordered"/>
-                    </div>
-                    <Button type="submit" className="w-full" color="primary">Send message</Button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
         <Toaster position="bottom-center" />
       </div>

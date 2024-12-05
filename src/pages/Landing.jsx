@@ -37,7 +37,7 @@ const Landing = () => {
     <div className="bg-black text-white">
                 <div className="flex h-14 items-center  px-4 lg:h-[60px] lg:px-6">
             <NavLink to="/" className="flex items-center gap-2 text-3xl font-semibold">
-              <span className="text-white font-bold pt-5">TimeSlot</span>
+              <span className="text-white font-bold pt-5">Timeslot</span>
             </NavLink>
           </div>
       {/* Hero Section */}
@@ -130,7 +130,7 @@ const Landing = () => {
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+            <div className="mx-auto grid max-w-7cxl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
               <div className="flex flex-col justify-center space-y-4">
                 <ul className="grid gap-6">
                   <li className="flex items-start space-x-4">
@@ -167,7 +167,7 @@ const Landing = () => {
                   <img 
                     src="/Bookings.png" 
                     alt="Scheduling Interface" 
-                    className="rounded-lg"
+                    className="rounded-lg "
                      
                   />
                 </CardBody>
@@ -178,7 +178,7 @@ const Landing = () => {
 
       {/* Benefits Section */}
       <section className="bg-black text-white py-20 border-t border-gray-800">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold mb-8">Schedule meetings without the back-and-forth</h2>
@@ -206,7 +206,7 @@ const Landing = () => {
               <Card className="bg-gray-900 border border-gray-800">
                 <CardBody>
                   <img 
-                    src="/Bookings.png" 
+                    src="/timeslotBookingPage.png" 
                     alt="Scheduling Interface" 
                     className="rounded-lg"
                   />

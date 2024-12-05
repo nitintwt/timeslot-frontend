@@ -9,7 +9,7 @@ export default function SlotCard({startTime , endTime , date , slotId}) {
 
   const deleteSlot = async ()=>{
     try {
-      const action = await axios.delete(`/api/v1/slot/deleteSlot?slotId=${slotId}`)
+      const action = await axios.delete(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/deleteSlot?slotId=${slotId}`)
       console.log("deleted",action)
       setDeleted(true)
     } catch (error) {

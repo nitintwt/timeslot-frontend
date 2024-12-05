@@ -22,7 +22,7 @@ export default function Sidebar() {
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center px-4 lg:h-[60px] lg:px-6">
             <NavLink to="/" className="flex items-center gap-2 text-3xl font-semibold">
-              <span className="text-white font-bold">TimeSlot</span>
+              <span className="text-white font-bold">Timeslot</span>
             </NavLink>
           </div>
 

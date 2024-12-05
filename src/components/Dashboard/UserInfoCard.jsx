@@ -22,14 +22,14 @@ function UserInfoCard() {
     const code = query.get('code');
     const fetchUserDetails = async ()=>{
       try {
-        const userDetails = await axios.get(`/api/v1/users/getUserDetails?userDbId=${userDbId}`)
+        const userDetails = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/getUserDetails?userDbId=${userDbId}`)
         if (userDetails?.data?.data?.userName) {
           setUserNameExist(true)
           setUserName(userDetails?.data?.data?.userName)
         }
         console.log("Userdetails" , userDetails)
         if (!userDetails?.data?.data?.tokens){
-          const createGoogleTokens = await axios.post(`/api/v1/google/redirect?code=${code}`, {userDbId})
+          const createGoogleTokens = await axios.post(`${import.meta.env.VITE_AWS_GOOGLE_API}/api/v1/google/redirect?code=${code}`, {userDbId})
           console.log(createGoogleTokens)
         }
         setTokenExist(true)
@@ -45,7 +45,7 @@ function UserInfoCard() {
 
   const submitUsername = async ()=>{
     try {
-      const subitData =  await axios.post(`/api/v1/users/setUsername` , {username: userName, userDbId: userDbId})
+      const subitData =  await axios.post(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/setUsername` , {username: userName, userDbId: userDbId})
       console.log(subitData)
       setUserNameExist(true)
     } catch (error) {
