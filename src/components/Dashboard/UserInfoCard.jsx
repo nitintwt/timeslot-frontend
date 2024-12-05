@@ -90,7 +90,7 @@ function UserInfoCard() {
                 connected
               </Link>
             ):(
-            <Link variant="outline" size="sm" href={`/api/v1/google/OAuth`}>
+            <Link variant="outline" size="sm" href={`${import.meta.env.VITE_AWS_GOOGLE_API}/api/v1/google/OAuth`}>
               connect
             </Link>
             )}
