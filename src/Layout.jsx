@@ -3,6 +3,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import UserAvatar from "./components/ui/UserAvatar";
+import { Analytics } from '@vercel/analytics/next';
 
 export default function MainLayout() {
   const [cookies]= useCookies()
@@ -29,6 +30,7 @@ export default function MainLayout() {
       </header>
       <div className="flex-1 bg-black">
         <Outlet />
+        <Analytics />
       </div>
     </div>
   </div>
