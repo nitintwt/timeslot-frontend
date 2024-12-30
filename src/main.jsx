@@ -21,8 +21,10 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Pricing from './components/Landing/Pricing'
 import PricingPage from './components/Pricing/PricingCards'
-import { Analytics } from '@vercel/analytics/next'
+import { inject } from '@vercel/analytics'
 
+// for vercel analytics
+inject()
 
 const router = createBrowserRouter([
   {
@@ -121,7 +123,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
      <NextUIProvider>
        <RouterProvider router={router}/>
-       <Analytics/>
       </NextUIProvider>
     </Provider>  
   </React.StrictMode>
