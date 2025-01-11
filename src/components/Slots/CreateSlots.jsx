@@ -39,8 +39,7 @@ function CreateSlots() {
     // fetch the user details from the db ,, and checks whether the user has linked his stripe account or not. And also fetch the username
     useEffect(()=>{
       const fetchUserDetails = async ()=>{
-        const userDetails = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/getUserDetails` , {params: {userDbId: userDbId}})
-        console.log(userDetails?.data?.data?.userName)
+        const userDetails = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/userDetails` , {params: {userDbId: userDbId}})
         if (paid=='true' &&  userDetails?.data?.data?.stripeAccountId== null) {
           toast.warning("Please link your Razorpay or lemonsqueezy account. Go to Dashboard Page.")
         }
@@ -74,7 +73,6 @@ function CreateSlots() {
   const handleCreateSlot = async ()=>{
     try {
       const savedSlotsInDb = await axios.post(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/createSlot` , {slots})
-      console.log(savedSlotsInDb)
       setStartTime('')
       setEndTime('')
       setPaid(false)
@@ -82,8 +80,7 @@ function CreateSlots() {
       dispatch(deleteAllSlots())
       toast.success("Slots created Successfully")
     } catch (error) {
-      console.log("Something went wrong while saving slots in db" , error)
-      toast.error("Something went wrong while creating your slots. Please try again.")
+      toast.error(error.response.data.message)
     }
   }
 

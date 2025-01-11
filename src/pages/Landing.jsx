@@ -26,8 +26,6 @@ const Landing = () => {
   const [cookies] = useCookies()
   const navigate = useNavigate()
 
-  console.log("cookies data from landing page" , cookies)
-
   useEffect(() => {
     if (cookies?.userData?._id) {
       navigate("/dashboard")

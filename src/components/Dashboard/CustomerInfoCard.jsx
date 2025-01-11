@@ -10,17 +10,14 @@ export default function Component() {
   const [cookies]= useCookies()
   const userDbId = cookies?.userData?._id
 
-
-
   useEffect (()=>{
     const fetchAllCustomersData = async ()=>{
       try {
-        const data = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/getAllCustomersData?userDbId=${userDbId}`)
-        console.log("cutomers",data.data.data)
+        const data = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/allCustomersData?userDbId=${userDbId}`)
         setCustomers(data.data.data)
         setIsloading(false)
       } catch (error) {
-        console.log("Something went wrong while fetching customer data" , error)
+        console.log("Something went wrong while fetching customer data")
       }
     }
     fetchAllCustomersData()
@@ -43,12 +40,12 @@ export default function Component() {
               </tr>
             </thead>
             { isloading ? (
-              <h1>Loading....</h1>
+              <h3>Loading....</h3>
             ):(
               <tbody>
                 {customers.map((customer, index) => (
                   <tr
-                    key={customer.id}
+                    key={customer._id}
                     className='hover:bg-black transition-colors duration-200'
                   >
                     <td className="p-3">{customer.customerName}</td>

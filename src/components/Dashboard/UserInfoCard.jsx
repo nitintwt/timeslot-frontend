@@ -7,6 +7,7 @@ import {Link} from "@nextui-org/react";
 import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
 import { useCookies } from 'react-cookie';
 import {User} from "@nextui-org/react";
+import { toast, Toaster } from 'sonner';
 
 function UserInfoCard() {
   const [userName , setUserName]= useState('')
@@ -22,12 +23,11 @@ function UserInfoCard() {
     const code = query.get('code');
     const fetchUserDetails = async ()=>{
       try {
-        const userDetails = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/getUserDetails?userDbId=${userDbId}`)
+        const userDetails = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/userDetails?userDbId=${userDbId}`)
         if (userDetails?.data?.data?.userName) {
           setUserNameExist(true)
           setUserName(userDetails?.data?.data?.userName)
         }
-        console.log("Userdetails" , userDetails)
         if (!userDetails?.data?.data?.tokens){
           const createGoogleTokens = await axios.post(`${import.meta.env.VITE_AWS_GOOGLE_API}/api/v1/google/redirect?code=${code}`, {userDbId})
           console.log(createGoogleTokens)
@@ -35,9 +35,8 @@ function UserInfoCard() {
         setTokenExist(true)
         query.delete('code');
       } catch (error) {
-        console.log("Something went wrong while fetching user details" , error)
+        console.log("Something went wrong while fetching user details")
         query.delete('code');
-        
       }
     }
     fetchUserDetails()
@@ -49,7 +48,7 @@ function UserInfoCard() {
       console.log(subitData)
       setUserNameExist(true)
     } catch (error) {
-      console.log('Something went wrong while submitting username' , error)
+      toast.error(error?.response?.data?.message)
     }
   }
 
@@ -116,6 +115,7 @@ function UserInfoCard() {
         </div>
       </div>
     </div>
+    <Toaster position='bottom-center'/>
   </div>
   )
 }

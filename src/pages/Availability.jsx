@@ -9,7 +9,7 @@ function Availability() {
         <h1 className="text-xl font-bold">Your available slots</h1>
       </header>
       <div className='p-5 lg:max-w-3xl'>
-        <ScrollShadow className=" h-[580px]">
+        <ScrollShadow className=" h-[800px]">
          <AvailableSlots/>
         </ScrollShadow>
       </div>

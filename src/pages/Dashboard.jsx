@@ -6,7 +6,6 @@ import { useCookies } from "react-cookie";
 
 export default function Dashboard() {
   const cookies = useCookies()
-  console.log("cookies data from dashboard" , cookies)
   return (
     <div className="flex bg-black dark flex-col h-full w-full bg-muted/40 md:flex-row">
       <div className="flex flex-1 flex-col gap-6 p-6 sm:p-8 md:p-10">

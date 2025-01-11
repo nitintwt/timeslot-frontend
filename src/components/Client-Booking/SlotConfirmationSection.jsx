@@ -38,13 +38,12 @@ export default function SelectTimeSlot() {
     const formattedDate = formatDate(selectedDate);
     const fetchSlots = async ()=>{
       try {
-        const fetch = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/getSlots` , {
+        const fetch = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/slot/slots` , {
           params:{date:formattedDate , userName:username,}
         })
         setSlots(fetch.data.data)
-        console.log(fetch)
       } catch (error) {
-        console.log("Error fetching slots" , error)
+        console.log("Error fetching slots")
       }
     }
     fetchSlots()
@@ -70,7 +69,6 @@ export default function SelectTimeSlot() {
       const setCalenderEvent = await axios.post(`${import.meta.env.VITE_AWS_GOOGLE_API}/api/v1/google/scheduleEvent` , {
         userName: username , client : name , clientEmail: email , date: formattedDate , timeSlot:selectedTimeSlot._id , meetReason: reason,
       })
-      console.log("Calender event done" , setCalenderEvent.data.data)
       const sendMail = await axios.post(`${import.meta.env.VITE_AWS_CLIENT_API}/api/v1/customer/sendmail`, {
         clientEmail: email,
         clientName:name,
@@ -78,11 +76,9 @@ export default function SelectTimeSlot() {
         meetLink: setCalenderEvent?.data?.data
       })
       setBooked(true)
-      console.log("mail sent successfully" , sendMail)
     } catch (error) {
       setBooking(false)
-      console.log("Something went wrong while booking slot" , error)
-      toast.error(error?.response?.data?.errors)
+      toast.error(error?.response?.data?.message)
     }
   }
 

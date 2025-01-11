@@ -4,6 +4,9 @@ import { Button, ButtonGroup } from '@nextui-org/button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
+import {Input} from "@nextui-org/input";
+import { Link} from 'react-router-dom';
 
 export default function LoginBox() {
   const [email, setEmail] = useState(''); 
@@ -18,81 +21,66 @@ export default function LoginBox() {
         email:email,
         password:password
       })
-      console.log("login data",login)
       setCookies("userData",{_id:login?.data?.data?.user?._id , email:login?.data?.data?.user?.email , name:login?.data?.data?.user?.fullName , paidUser: login?.data?.data?.user?.paidUser})
       toast.success("Login successfull")
-      console.log("cookies data" , cookies)
       setTimeout(()=>{
         navigate("/dashboard")
       }, 1000)
     } catch (error) {
-      console.log("Something went wrong while login" , error)
-      toast.error(error?.response?.data?.data)
+      toast.error(error?.response?.data?.message)
     }
   }
 
   return (
-    <div className="flex min-h-[100dvh]  justify-center bg-gray-950 px-4 py-12 ">
-      <div className="mx-auto w-full max-w-md space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-50 ">
-            Welcome Back
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-400 ">
-            Enter your email and password to log in to your account.
+    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+      <Card className="w-full max-w-md bg-black text-white border border-gray-800">
+        <CardHeader className="space-y-1 grid justify-center">
+          <h2 className="text-2xl font-bold text-center text-blue-500">Log in</h2>
+          <p className="text-center text-gray-400">
+            Enter your credentials to access your account
           </p>
-        </div>
-        <div>
-          <h2
-            className="block text-sm font-medium text-gray-300 "
-            htmlFor="email"
-          >
-            Email address
-          </h2>
-          <div className="mt-1">
-            <input
-              autoComplete="email"
-              className="block w-full appearance-none rounded-md border text-white border-gray-700 px-3 py-2 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500  bg-gray-950 "
-              id="email"
-              name="email"
-              required
-              type="email"
+        </CardHeader>
+        <CardBody className="space-y-4">
+          <div className="space-y-2">
+            <h3 htmlFor="email" className="text-gray-300">Email</h3>
+            <Input 
+              id="email" 
+              type="email" 
+              radius='sm'
+              variant='bordered'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required 
+              className="bg-gray-900 border-gray-700 text-white placeholder-gray-500"
             />
           </div>
-        </div>
-        <div>
-          <h2
-            className="block text-sm font-medium text-gray-300 "
-            htmlFor="password"
-          >
-            Password
-          </h2>
-          <div className="mt-1">
-            <input
-              autoComplete="current-password"
-              className="block w-full appearance-none rounded-md border text-white border-gray-700 px-3 py-2 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500  bg-gray-950 "
-              id="password"
-              name="password"
-              required
-              type="password"
+          <div className="space-y-2">
+            <h3 htmlFor="password" className="text-gray-300">Password</h3>
+            <Input 
+              id="password" 
+              type="password" 
+              required 
+              radius='sm'
+              variant='bordered'
+              className="bg-gray-900 border-gray-700 text-white"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-        </div>
-        <Button
-          color="primary"
-          size="lg"
-          variant="shadow"
-          className=" w-full"
-          onClick={handleSubmit}
-        >
-          Login
-        </Button>
-      </div>
-      <Toaster position="bottom-center" />
+        </CardBody>
+        <CardFooter className="flex flex-col space-y-4">
+          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={handleSubmit}>
+            Log In
+          </Button>
+          <div className="text-sm text-center text-gray-400">
+            Don't have an account?{' '}
+            <Link to="/signup" className="text-blue-400 hover:underline">
+              Sign up
+            </Link>
+          </div>
+        </CardFooter>
+      </Card>
+      <Toaster position='bottom-center'/>
     </div>
   );
 }
