@@ -22,9 +22,12 @@ import Login from './pages/Login'
 import Pricing from './components/Landing/Pricing'
 import PricingPage from './components/Pricing/PricingCards'
 import { inject } from '@vercel/analytics'
+import axios from 'axios'
 
 // for vercel analytics
 inject()
+
+axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
   {
