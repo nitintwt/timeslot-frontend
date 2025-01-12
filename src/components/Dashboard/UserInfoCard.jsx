@@ -44,7 +44,7 @@ function UserInfoCard() {
 
   const submitUsername = async ()=>{
     try {
-      const subitData =  await axios.post(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/setUsername` , {username: userName, userDbId: userDbId})
+      const subitData =  await axios.post(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/setUsername` , {username: userName, userDbId: userDbId} , {withCredentials:true})
       console.log(subitData)
       setUserNameExist(true)
     } catch (error) {
