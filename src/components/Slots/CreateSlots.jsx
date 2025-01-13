@@ -17,6 +17,7 @@ function CreateSlots() {
   const [date , setDate]= useState(today(getLocalTimeZone()))
   const [paid , setPaid]= useState(false)
   const [price , setPrice]= useState(0)
+  const [isToken , setIsToken]= useState(false)
   
   const dispatch = useDispatch()
   const slots = useSelector((state)=> state?.slots?.slots)
@@ -43,9 +44,14 @@ function CreateSlots() {
         if (paid=='true' &&  userDetails?.data?.data?.stripeAccountId== null) {
           toast.warning("Please link your Razorpay or lemonsqueezy account. Go to Dashboard Page.")
         }
+        if(userDetails?.data?.data?.tokens){
+          setIsToken(true)
+        } else {
+          toast.warning("Attach your google account. Go to dashboard")
+        }
       }
       fetchUserDetails()
-    },[paid ])
+    },[paid , handleSubmit ])
 
 
 
@@ -146,7 +152,7 @@ function CreateSlots() {
               }
             </div>
             <div className='flex justify-end'>
-              <Button className='m-5 text-md font-bold' color="primary" variant="shadow" onClick={handleCreateSlot}>Create</Button>
+              {isToken && <Button className='m-5 text-md font-bold' color="primary" variant="shadow" onClick={handleCreateSlot}>Create</Button>}
             </div>
           </Fragment>}
         </div>
