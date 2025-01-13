@@ -27,7 +27,6 @@ import axios from 'axios'
 // for vercel analytics
 inject()
 
-axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
   {
