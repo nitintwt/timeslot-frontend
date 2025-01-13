@@ -37,23 +37,6 @@ function CreateSlots() {
     dispatch(deleteAllSlots())
   },[date])
 
-    // fetch the user details from the db ,, and checks whether the user has linked his stripe account or not. And also fetch the username
-    useEffect(()=>{
-      const fetchUserDetails = async ()=>{
-        const userDetails = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/userDetails` , {params: {userDbId: userDbId}})
-        if (paid=='true' &&  userDetails?.data?.data?.stripeAccountId== null) {
-          toast.warning("Please link your Razorpay or lemonsqueezy account. Go to Dashboard Page.")
-        }
-        if(userDetails?.data?.data?.tokens){
-          setIsToken(true)
-        } else {
-          toast.warning("Attach your google account. Go to dashboard")
-        }
-      }
-      fetchUserDetails()
-    },[paid , handleSubmit ])
-
-
 
   // when user create a slot , first it get saves in the redux store
   const handleSubmit = ()=>{
@@ -74,6 +57,22 @@ function CreateSlots() {
      setPaid(false)
      setPrice('')
   }
+
+  // fetch the user details from the db ,, and checks whether the user has linked his stripe account or not. And also fetch the username
+  useEffect(()=>{
+    const fetchUserDetails = async ()=>{
+      const userDetails = await axios.get(`${import.meta.env.VITE_AWS_USERS_API}/api/v1/users/userDetails` , {params: {userDbId: userDbId}})
+      if (paid=='true' &&  userDetails?.data?.data?.stripeAccountId== null) {
+        toast.warning("Please link your Razorpay or lemonsqueezy account. Go to Dashboard Page.")
+      }
+      if(userDetails?.data?.data?.tokens){
+        setIsToken(true)
+      } else {
+        toast.warning("Attach your google account. Go to dashboard")
+      }
+    }
+    fetchUserDetails()
+  },[paid , handleSubmit ])
 
   // slots array which I get from the redux store is saved in db
   const handleCreateSlot = async ()=>{
