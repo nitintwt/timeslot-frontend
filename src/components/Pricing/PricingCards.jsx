@@ -45,7 +45,7 @@ export default function PricingPage() {
   ];
 
     // Function to load script and append in DOM tree.
-    const loadScript = src => new Promise((resolve) => {
+    const loadScript = (src) => new Promise((resolve) => {
       const script = document.createElement('script');
       script.src = src;
       script.onload = () => {
@@ -76,7 +76,7 @@ export default function PricingPage() {
     const handleStart = async (id) => {
       try {
         // Create order
-        const order = await axios.post("http://localhost:3005/api/v1/payment/order", {subscriptionId: id});
+        const order = await axios.post(`${import.meta.env.VITE_AWS_PAYMENT_API}/api/v1/payment/order`, {subscriptionId: id});
         console.log("Order created", order.data.data);
   
         const paymentObject = new window.Razorpay({
@@ -85,7 +85,7 @@ export default function PricingPage() {
           ...order.data.data,
           handler: async function (response) {
             try {
-              const verify = await axios.post("http://localhost:3005/api/v1/payment/verify", {
+              const verify = await axios.post(`${import.meta.env.VITE_AWS_PAYMENT_API}/api/v1/payment/verify`, {
                 orderId: response.razorpay_order_id,
                 paymentId: response.razorpay_payment_id,
                 signature: response.razorpay_signature,
