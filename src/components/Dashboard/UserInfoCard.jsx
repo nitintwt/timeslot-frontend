@@ -65,7 +65,7 @@ function UserInfoCard() {
         <div className=''>
           <h2>Link</h2>
           <p className='ml-2'>
-            <Link href={`/${userName}`}> {`timeslot-nine.vercel.app/${userName}`}</Link>
+            <Link href={`/${userName}`}> {`timeslot.co.in/${userName}`}</Link>
           </p>
         </div>
       ) : (

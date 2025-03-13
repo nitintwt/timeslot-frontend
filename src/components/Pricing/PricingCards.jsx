@@ -77,7 +77,6 @@ export default function PricingPage() {
       try {
         // Create order
         const order = await axios.post(`${import.meta.env.VITE_AWS_PAYMENT_API}/api/v1/payment/order`, {subscriptionId: id});
-        console.log("Order created", order.data.data);
   
         const paymentObject = new window.Razorpay({
           key: import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -91,11 +90,10 @@ export default function PricingPage() {
                 signature: response.razorpay_signature,
                 userId: cookies?.userData?._id
               });
-              console.log("Payment verified", verify);
               setCookies("userData", {...cookies.userData , paidUser:true})
               navigate("/dashboard")
             } catch (error) {
-              console.log("Verification error", error);
+              console.log("Verification error");
             }
           }
         });
